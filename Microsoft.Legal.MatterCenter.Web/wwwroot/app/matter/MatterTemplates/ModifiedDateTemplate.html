@@ -1,0 +1,33 @@
+﻿<div col-index='renderIndex'     
+     role='columnheader'>    
+    
+        <span class='ui-grid-cell-contents ui-grid-header-cell-primary-focus ui-grid-header-cell-label ng-binding'
+              tabindex="0" 
+              ng-focus='grid.appScope.vm.ariaMessage("click this column to filter search results based on "+col.colDef.field+" column ")'
+              sortby="{{col.colDef.field}}"
+              title='Click to sort last modified date'>
+            {{ col.colDef.displayName }}
+            <span class="headerfilter" ng-if="grid.appScope.vm.moddatefilter" tabindex="0">
+                <i class="ms-Icon ms-Icon--filter"></i>
+            </span>
+            <span id="asc{{col.colDef.field}}" style="float:right;display:none" class='padl10px' >↑</span>
+            <span id="desc{{col.colDef.field}}" style="float:right;display:none" class='padlf10' >↓</span>
+        </span>
+
+        <span class='sorticon keep-open' tabindex="0" 
+              ng-keydown="$event.keyCode==13?grid.appScope.vm.openMatterHeader($event,grid.appScope.vm.matterConfigContent.GridColumn4Header):null"
+               ng-click="grid.appScope.vm.openMatterHeader($event,grid.appScope.vm.matterConfigContent.GridColumn4Header)"
+              ng-focus='grid.appScope.vm.ariaMessage("click this column to filter search results based on "+col.colDef.field+" column ")'>
+            <a href='javascript:;' class='prisma-header-dropdown-anchor' id='acombo' tabindex="-1"
+               ng-keydown="$event.keyCode==13?grid.appScope.vm.openMatterHeader($event,grid.appScope.vm.matterConfigContent.GridColumn4Header):null"
+               ng-click="grid.appScope.vm.openMatterHeader($event,grid.appScope.vm.matterConfigContent.GridColumn4Header)">
+                <img alt="filter dropdown image {{col.colDef.field}}" title="filter dropdown image" src='../images/icon-combobox.png' />
+            </a>
+        </span>
+
+    
+    
+    <div class='ui-grid-column-menu-button ng-scope' ng-if='grid.options.enableColumnMenus && !col.isRowHeader && col.colDef.enableColumnMenu !== false' ng-click='grid.appScope.toggleMenu($event)' ng-class='{' ui-grid-column-menu-button-last-col' isLastCol}'>
+        <i title='' aria-hidden='true' class='ui-grid-icon-up-dir'>&nbsp;</i>
+    </div>
+</div>

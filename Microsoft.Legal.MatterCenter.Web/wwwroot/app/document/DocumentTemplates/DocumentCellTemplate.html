@@ -1,0 +1,66 @@
+﻿<!--//adding template-->
+<div class='row' style="margin-right:0" role="gridcell">
+    <div role="link" aria-readonly="true" ng-keydown="grid.appScope.vm.openDocumentFlyout($event)" tabindex="0" class='col-xs-8 col-sm-9 col-md-9 col-lg-10' id='documentPopup' >
+        <a documentflyout tabindex="0"  role="link"   class='btn btn-link col-xs-12 col-sm-12 txtellipsis hidden-xs' title="{{row.entity.documentName}}"
+           style='text-align: left;padding-left:0' details={{row.entity}} 
+          >
+            <img class="docTypeIconHeader" tabindex="-1"  id="docTypeIcon"                 
+                 alt="{{grid.appScope.vm.getDocumentName(row.entity.documentExtension)}}"                 
+                 src="{{row.entity.documentIconUrl}}"  
+                 ng-attr-title="{{grid.appScope.vm.getDocumentName(row.entity.documentExtension)}}" /> 
+            {{row.entity.documentName}}
+        </a>
+        <a documentflyout tabindex="0" role="link"    class='btn btn-link col-xs-12 col-sm-12 txtellipsis visible-xs' style='text-align: left;padding-left:0'
+           details={{row.entity}} title="{{row.entity.documentName}}" >
+            <img tabindex="-1"  class="docTypeIconHeader"  role="img" id="docTypeIcon" 
+                  src="{{row.entity.documentIconUrl}}" ng-attr-title="{{grid.appScope.vm.getDocumentName(row.entity.documentExtension)}}" /> {{row.entity.documentName}}
+        </a>
+        <div class='popcontent' style="display:none;">
+        </div>
+    </div>
+    <div class='col-xs-4 col-sm-3 col-md-3 col-lg-2 text-right'
+         tabindex="0"  ng-keydown="grid.appScope.vm.openContextMenu($event, row.entity)"
+         role="link" aria-readonly="true"   ng-focus='grid.appScope.vm.ariaMessage("press enter key to expand context menu")'
+          id="doccelltemp">
+        <div class='dropdown'>
+            <a tabindex="0" class='btn btn-link dropdown-toggle ms-Icon ms-Icon--ellipsis ellipsis UiGrid-a'  dropdown  
+               data-toggle='dropdown' aria-live="assertive" title="context menu"  
+              
+                 aria-atomic="true"></a>
+            <ul style='margin:0;padding:0' class='dropdown-menu'  >
+
+                <li class='ms-ContextualMenu-item'  >
+                    <a tabindex="0" class='ECBItem ms-ContextualMenu-link upload' 
+                      
+                       title="{{grid.appScope.vm.documentConfigContent.ECBMenu1Title}}" href='{{row.entity.documentOWAUrl}}'
+                       target='_blank' 
+                       aria-label="{{grid.appScope.vm.documentConfigContent.ECBMenu1Title}}"
+                       aria-live="assertive" 
+                       aria-atomic="true">{{grid.appScope.vm.documentConfigContent.EllipsisLink1Text}}</a>
+                </li>
+                <li class='ms-ContextualMenu-item'  >
+                   
+                    <a tabindex="0" class='ECBItem ms-ContextualMenu-link upload' 
+                       aria-live="assertive" aria-atomic="true" href="javascript:;"
+                        aria-label="{{grid.appScope.vm.documentConfigContent.ECBMenu2Title}}"
+                         title="{{grid.appScope.vm.documentConfigContent.ECBMenu2Title}}"
+                       ng-click="grid.appScope.vm.viewDocumentMatter(row.entity.documentMatterUrl)">
+                        {{grid.appScope.vm.documentConfigContent.EllipsisLink2Text}}
+                    </a>
+                </li>
+                <li tabindex="0" class='ms-ContextualMenu-item' 
+                    ng-click='row.entity.MatterInfo===undefined?grid.appScope.vm.PinMatter(row):grid.appScope.vm.UnpinDocument(row)'
+                    ng-keydown="grid.appScope.vm.closeContextMenu($event)"  >                   
+                    <a  tabindex="0"
+                       ng-click='row.entity.MatterInfo===undefined?grid.appScope.vm.PinMatter(row):grid.appScope.vm.UnpinDocument(row)'
+                       aria-live="assertive" aria-atomic="true"
+                       class='ECBItem ms-ContextualMenu-link upload'
+                       aria-label="{{row.entity.MatterInfo===undefined?grid.appScope.vm.documentConfigContent.ECBMenu3Title:grid.appScope.vm.documentConfigContent.ECBMenu4Title}}"
+                       title="{{row.entity.MatterInfo===undefined?grid.appScope.vm.documentConfigContent.ECBMenu3Title:grid.appScope.vm.documentConfigContent.ECBMenu4Title}}">
+                        {{row.entity.MatterInfo===undefined?grid.appScope.vm.documentConfigContent.EllipsisLink3Text:grid.appScope.vm.documentConfigContent.EllipsisLink4Text}}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

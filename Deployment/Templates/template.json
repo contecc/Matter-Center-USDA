@@ -1,0 +1,205 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+  "parameters": {
+    "webSite_name": {
+      "defaultValue": "MatterCenterWeb",
+      "type": "string",
+      "metadata": {
+        "description": "Enter the webapp name to be created. This will be part of the URL of your app. It should be unique across entire Azure."
+      }
+    },
+    "skuName": {
+      "type": "string",
+      "defaultValue": "B1",
+      "allowedValues": [
+        "B1",
+        "B2",
+        "B3",
+        "S1",
+        "S2",
+        "S3",
+        "P1",
+        "P2",
+        "P3",
+        "P4"
+      ],
+      "metadata": {
+        "description": "Describes plan's pricing tier and instance size. Check details at https://azure.microsoft.com/en-us/pricing/details/app-service/"
+      }
+    },
+    "skuCapacity": {
+      "type": "int",
+      "defaultValue": 1,
+      "minValue": 1,
+      "metadata": {
+        "description": "Describes plan's instance count"
+      }
+    },
+    "StorageAccountType": {
+      "type": "string",
+      "defaultValue": "Standard_RAGRS",
+      "allowedValues": [
+        "Standard_LRS",
+        "Standard_ZRS",
+        "Standard_GRS",
+        "Standard_RAGRS",
+        "Premium_LRS"
+      ]
+    }
+  },
+  "variables": {
+    "Redis_cache_name": "[concat(parameters('webSite_name'), 'RedisCache')]",
+    "autoscalesettings_name": "[concat(parameters('webSite_name'), 'ScaleSettings')]",
+    "components_AppInsights_name": "[concat(parameters('webSite_name'), 'AppInsights')]",
+    "vaults_KeyVault_name": "[toLower(take(parameters('webSite_name'), 24))]",
+    "storageAccount_name": "[toLower(take(parameters('webSite_name'), 24))]",
+    "serverfarms_WebPlan_name": "[concat(parameters('webSite_name'), 'WebPlan')]"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Cache/Redis",
+      "name": "[variables('Redis_cache_name')]",
+      "apiVersion": "2016-04-01",
+      "location": "[resourceGroup().location]",
+      "tags": {},
+      "properties": {
+        "redisVersion": "3.0",
+        "sku": {
+          "name": "Standard",
+          "family": "C",
+          "capacity": 0
+        },
+        "enableNonSslPort": false,
+        "redisConfiguration": {
+          "maxclients": "256",
+          "maxmemory-reserved": "2",
+          "maxmemory-delta": "2"
+        }
+      },
+      "resources": [],
+      "dependsOn": []
+    },
+    {
+      "type": "microsoft.insights/autoscalesettings",
+      "name": "[variables('autoscalesettings_name')]",
+      "apiVersion": "2014-04-01",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "profiles": [
+          {
+            "name": "Default",
+            "capacity": {
+              "minimum": "1",
+              "maximum": "2",
+              "default": "1"
+            },
+            "rules": [
+              {
+                "metricTrigger": {
+                  "metricName": "CpuPercentage",
+                  "metricNamespace": "",
+                  "metricResourceUri": "[resourceId('Microsoft.Web/serverfarms', variables('serverfarms_WebPlan_name'))]",
+                  "timeGrain": "PT1M",
+                  "statistic": "Average",
+                  "timeWindow": "PT10M",
+                  "timeAggregation": "Average",
+                  "operator": "GreaterThan",
+                  "threshold": 80
+                },
+                "scaleAction": {
+                  "direction": "Increase",
+                  "type": "ChangeCount",
+                  "value": "1",
+                  "cooldown": "PT10M"
+                }
+              },
+              {
+                "metricTrigger": {
+                  "metricName": "CpuPercentage",
+                  "metricNamespace": "",
+                  "metricResourceUri": "[resourceId('Microsoft.Web/serverfarms', variables('serverfarms_WebPlan_name'))]",
+                  "timeGrain": "PT1M",
+                  "statistic": "Average",
+                  "timeWindow": "PT1H",
+                  "timeAggregation": "Average",
+                  "operator": "LessThan",
+                  "threshold": 60
+                },
+                "scaleAction": {
+                  "direction": "Decrease",
+                  "type": "ChangeCount",
+                  "value": "1",
+                  "cooldown": "PT1H"
+                }
+              }
+            ]
+          }
+        ],
+        "enabled": false,
+        "name": "[variables('autoscalesettings_name')]",
+        "targetResourceUri": "[resourceId('Microsoft.Web/serverfarms', variables('serverfarms_WebPlan_name'))]"
+      },
+      "resources": [],
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/serverfarms', variables('serverfarms_WebPlan_name'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Insights/components",
+      "kind": "web",
+      "name": "[variables('components_AppInsights_name')]",
+      "apiVersion": "2014-04-01",
+      "location": "South Central US",
+      "properties": {
+        "ApplicationId": "[variables('components_AppInsights_name')]"
+      },
+      "resources": [],
+      "dependsOn": [
+        "[concat('Microsoft.Web/sites/', parameters('webSite_name'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "sku": {
+        "name": "[parameters('StorageAccountType')]"
+      },
+      "kind": "Storage",
+      "name": "[variables('storageAccount_name')]",
+      "apiVersion": "2016-01-01",
+      "location": "[resourceGroup().location]",
+      "properties": {},
+      "dependsOn": []
+    },
+    {
+      "type": "Microsoft.Web/serverfarms",
+      "sku": {
+        "name": "[parameters('skuName')]",
+        "capacity": "[parameters('skuCapacity')]"
+      },
+      "name": "[variables('serverfarms_WebPlan_name')]",
+      "apiVersion": "2015-08-01",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "name": "[variables('serverfarms_WebPlan_name')]",
+        "numberOfWorkers": 0
+      },
+      "resources": [],
+      "dependsOn": []
+    },
+    {
+      "type": "Microsoft.Web/sites",
+      "name": "[parameters('webSite_name')]",
+      "apiVersion": "2015-08-01",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "name": "[parameters('webSite_name')]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('serverfarms_WebPlan_name'))]"
+      },
+      "resources": [],
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/serverfarms', variables('serverfarms_WebPlan_name'))]"
+      ]
+    }
+  ]
+}

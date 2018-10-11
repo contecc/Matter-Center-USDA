@@ -1,0 +1,1684 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+    body a {
+        text-decoration: none !important;
+    }
+
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set widths on the form inputs since otherwise they're 100% wide */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* Carousel */
+.carousel-caption {
+    z-index: 10 !important;
+}
+
+    .carousel-caption p {
+        font-size: 20px;
+        line-height: 1.4;
+    }
+
+
+.mainHeader {
+    background-color: #0072c6;
+}
+
+
+@media (max-width: 450px) {
+    .PersonalInfoFlyout {
+        display: none !important;
+    }
+
+    #ProfileSwitcher {
+        display: none !important;
+    }
+}
+
+@media (max-width: 320px) {
+    .width25 {
+        width: 5% !important;
+    }
+
+    .overflowxAuto {
+        overflow-x: auto !important;
+    }
+
+    .padbtm15 {
+        padding-bottom: 15px;
+    }
+}
+
+@media (max-width: 400px) {
+    .ContextualHelp {
+        max-width: 284px !important;
+    }
+}
+
+@media(max-width:347px) {
+    .width25 {
+        width: 5% !important;
+    }
+}
+
+@media screen and (max-width: 767px) and (min-width: 351px) {
+    .flyoutwidth {
+        width: 290px !important;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .flyoutwidth {
+        width: 238px !important;
+    }
+}
+
+@media(max-width:1038px) {
+    .matterGridAttorClass {
+        display: none !important;
+    }
+}
+
+@media(max-width:858px) {
+    .matterGridModDateClass {
+        display: none !important;
+    }
+}
+
+@media(max-width:698px) {
+    .matterGridClientClass {
+        display: none !important;
+    }
+}
+
+@media(max-height:400px) {
+    .flyoutWrapper {
+        max-height: 164px !important;
+    }
+
+    #filterResultsContainer {
+        max-height: 33px !important;
+    }
+}
+
+@media screen and (max-height:488px) and (min-height: 400px) {
+    .flyoutWrapper {
+        max-height: 220px !important;
+    }
+
+    #filterResultsContainer {
+        max-height: 85px !important;
+    }
+
+    .ContextualHelp {
+        max-height: 275px !important;
+    }
+}
+
+@media screen and ( max-height: 300px ) and (max-width:500px) {
+    .noResultsText {
+        margin-top: 10% !important;
+    }
+}
+
+@media screen and ( max-height: 484px ) and (max-width:2000px) {
+    .noResultsText {
+        margin-top: 2% !important;
+    }
+}
+
+@media(max-width:668px) {
+    #matterCenterHeader {
+        width: 660px !important;
+    }
+
+    .searchdashboard {
+        width: 660px !important;
+    }
+
+    .navtabs {
+        width: 681px;
+    }
+
+    .sortbymatters {
+        width: 660px;
+    }
+
+    #mattersGrid .ui-grid-viewport {
+        width: 660px;
+    }
+
+    .sortbymatters ul {
+        left: 136px;
+        width: 141px;
+    }
+
+    .dashboarddrop {
+        width: 473px;
+    }
+}
+
+@media(max-width:767px) {
+    .sortbymatters {
+        width: 670px;
+    }
+
+        .sortbymatters ul {
+            left: 157px !important;
+            width: 120px;
+        }
+}
+
+
+@media(max-width:1057px) {
+    .docGridVerClass {
+        display: none !important;
+    }
+}
+
+@media(max-width:977px) {
+    .docIdGridClass {
+        display: none !important;
+    }
+}
+
+@media(max-width:840px) {
+    .docOwnerGridClass {
+        display: none !important;
+    }
+}
+
+@media(max-width:673px) {
+    .docModDateGridClass {
+        display: none !important;
+    }
+}
+
+@media(max-width:940px) {
+    .docCreatedDateTypeClass {
+        display: none !important;
+    }
+}
+
+
+@media(max-width:1120px) {
+    .matterCreatedDateClass {
+        display: none !important;
+    }
+}
+
+@media(max-width:965px) {
+    .matterProjectTypeClass {
+        display: none !important;
+    }
+}
+
+@media(max-width:740px) {
+    .matterTeamTypeClass {
+        display: none !important;
+    }
+}
+
+
+/*Document Dashboard classes*/
+.docGridVerClass {
+    display: table-cell;
+}
+
+.docIdGridClass {
+    display: table-cell;
+}
+
+.docModDateGridClass {
+    display: table-cell;
+}
+
+.docOwnerGridClass {
+    display: table-cell;
+}
+
+.docCreatedDateTypeClass {
+    display: table-cell;
+}
+/*End of document dashboard classed*/
+
+
+/*Matter Dasboard classes*/
+.matterGridClientClass {
+    display: table-cell;
+}
+
+.matterGridModDateClass {
+    display: table-cell;
+}
+
+.matterGridAttorClass {
+    display: table-cell;
+}
+
+.matterCreatedDateClass {
+    display: table-cell;
+}
+
+.matterProjectTypeClass {
+    display: table-cell;
+}
+
+.matterTeamTypeClass {
+    display: table-cell;
+}
+/*End of Matter Dasboard classes*/
+
+@media (min-width: 768px) {
+    .carousel-caption {
+        z-index: 10 !important;
+    }
+
+    .mainSearch {
+        float: right;
+        background-color: white;
+        height: 28px;
+        border: 1px solid #c8c8c8;
+        margin-top: 15px;
+        margin-right: 20px;
+        max-width: 400px;
+    }
+}
+
+@media screen and (max-width:867px) and (min-width: 268px) {
+    .hideDocTabs {
+        display: none !important;
+    }
+
+    .showDocDashboard {
+        display: block !important;
+    }
+}
+
+.hideDocTabs {
+    display: block;
+}
+
+.showDocDashboard {
+    display: none;
+}
+
+@media screen and (max-width:360px) and (min-width: 268px) {
+    .ui-grid-icon-container {
+        display: none !important;
+    }
+
+    #documentgrid .ui-grid-render-container, #mattergrid .ui-grid-render-container {
+        overflow: hidden !important;
+    }
+
+    #doccelltemp .dropdown-menu {
+        width: 165px !important;
+        margin-left: -97px !important;
+    }
+
+    #matcoltemp .dropdown-menu {
+        width: 165px !important;
+        margin-left: -68px !important;
+    }
+
+    .mainMatter {
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+
+    .ContextualHelpLogo {
+        margin-right: -5px;
+    }
+
+    .gridclass {
+        display: none !important;
+    }
+
+    .viewport {
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+    }
+
+    .searchwidth {
+        min-width: 204px !important;
+        max-width: 204px !important;
+    }
+}
+
+@media screen and (max-width:377px) {
+    .viewportlg {
+        overflow: hidden !important;
+        overflow-y: auto !important;
+    }
+}
+
+.viewportlg {
+    overflow: auto !important;
+    /*overflow-y: scroll !important;*/
+    /*height:510px !important;*/
+}
+
+@media screen and (max-width:767px) and (min-width: 250px) {
+    .popcontent {
+        position: absolute;
+        top: 31px !important;
+        background: #fff;
+        z-index: 1001;
+        border: 1px solid #ccc;
+        left: 27px !important;
+    }
+
+    /*.flyoutwidth {
+        width: 290px !important;
+    }*/
+
+    .mainSearch {
+        float: right;
+        background-color: white;
+        height: 28px;
+        border: 1px solid #c8c8c8;
+        margin-top: 15px;
+        margin-right: 20px;
+    }
+}
+
+@media screen and (max-width:431px) and (min-width: 268px) {
+    .defaultSection {
+        height: 74px !important;
+    }
+}
+
+.matters {
+    width: 500px;
+    height: 250px;
+}
+
+.ui-grid-row:hover .ui-grid-cell {
+    background-color: rgba(229, 241, 250, 1);
+}
+
+.ui-grid-row.ui-grid-row-selected > [ui-grid-row] > .ui-grid-cell {
+    background-color: rgba(229, 241, 250, 1);
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+.ui-grid-cell {
+    overflow: visible;
+}
+
+#documentgrid .ng-scope, #mattergrid .ng-scope {
+    overflow: visible;
+}
+
+#documentgrid .ui-grid-viewport, #mattergrid .ui-grid-viewport {
+    /*overflow: auto !important;*/
+    /*max-width: 1800px;*/
+    /*display: table;*/
+    position: relative;
+    cursor: default;
+}
+
+#documentgrid .ui-grid-render-container, #mattergrid .ui-grid-render-container {
+    /*overflow-x: auto;
+    min-width: 275px;*/
+    /*max-width: 1370px;*/
+}
+
+#documentgrid .ui-grid-render-container {
+    max-width: 1399px;
+}
+
+#documentgrid .ui-grid-menu-mid, #mattergrid .ui-grid-menu-mid {
+    position: relative;
+    left: 9px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 215px;
+    border: none;
+    max-height: 355px;
+    top: -29px;
+    box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.47);
+}
+
+#documentgrid .ui-grid-menu .ui-grid-menu-inner, #mattergrid .ui-grid-menu .ui-grid-menu-inner {
+    background: #fff;
+    border: 1px solid #d1d1d1;
+    padding: 30px 30px 50px 20px;
+    box-shadow: 0px 0px 10px #888888;
+    width: 215px;
+    height: 355px;
+    cursor: default;
+}
+
+    #documentgrid .ui-grid-menu .ui-grid-menu-inner ul li:not(:last-child) > button, #mattergrid .ui-grid-menu .ui-grid-menu-inner ul li:not(:last-child) > button {
+        border-bottom: none;
+        padding: 5px 0;
+        outline: none !important;
+        font-family: 'Segoe UI Web Regular','Segoe UI','Segoe WP',Tahoma,Arial,sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+    }
+
+    #documentgrid .ui-grid-menu .ui-grid-menu-inner ul li :hover, #mattergrid .ui-grid-menu .ui-grid-menu-inner ul li :hover {
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+#documentgrid .ui-grid-icon-ok:before, #mattergrid .ui-grid-icon-ok:before {
+    content: url(../images/checkbox-selected.png) !important;
+    top: 4px;
+    right: 5px;
+    position: relative;
+}
+
+#documentgrid .ui-grid-icon-cancel:before, #mattergrid .ui-grid-icon-cancel:before {
+    content: url(../images/checkbox.png) !important;
+    top: 4px;
+    right: 5px;
+    position: relative;
+}
+
+#documentgrid .ui-grid-menu-button, #mattergrid .ui-grid-menu-button {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    background: #fff;
+    border: 0px solid #d4d4d4;
+} 
+
+.showExpandIcon:before {
+    content: url("../Images/Column_Picker_Expand.png");
+}
+
+.closeColumnPicker:before {
+    content: url("../Images/Column_Picker_Close.png");
+}
+
+#documentgrid .ui-grid-menu-button .ui-grid-menu, #mattergrid .ui-grid-menu-button .ui-grid-menu {
+    right: 15px;
+    top: 29px;
+    cursor: default;
+}
+
+#documentgrid .ui-grid-menu .ui-grid-menu-inner ul li button, #mattergrid .ui-grid-menu .ui-grid-menu-inner ul li button {
+    border-bottom: none;
+    padding: 5px 0;
+    outline: none !important;
+    font-family: 'Segoe UI Web Regular','Segoe UI','Segoe WP',Tahoma,Arial,sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+#documentgrid .ui-grid-menu-mid {
+    left: 9px !important;
+}
+
+/*#documentgrid .ui-grid-menu-button {
+    right: 14px;
+}*/
+
+#attachmentHeader {
+    color: #333;
+    float: left;
+    font-size: 1.125em;
+    font-weight: 300;
+    padding-top: 5px;
+    text-align: left;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-bottom: 20px !important;
+    padding-bottom: 20px;
+}
+
+.mailHeaderItems {
+    border-right: 1px solid #666;
+}
+
+.mailHeaderItems, .mailHeaderFolders {
+    border-top: 1px solid #c8c8c8;
+    border-bottom: 1px solid #c8c8c8;
+    background-color: #eaeaea;
+    color: #333;
+    font-size: 0.875em;
+    float: left;
+    height: 36px;
+}
+
+.maildata {
+    float: left;
+    overflow-y: auto;
+    border-right: 1px solid #666;
+    border-bottom: 1px solid #c8c8c8;
+    min-height: 150px;
+}
+
+.folderContent {
+    float: right;
+    padding-right: 6px;
+    height: 150px;
+    border-bottom: 1px solid #c8c8c8;
+}
+
+.mailHeaderItems div, .mailHeaderFolders div {
+    padding-left: 10px;
+    padding-top: 8px;
+}
+
+.noFilesUploaded {
+    color: #333;
+    font: normal 0.875em 'Segoe UI';
+    margin-top: 14px;
+    min-height: 50px;
+    margin-left: 10px;
+}
+
+.margin0 {
+    margin: 0px;
+}
+
+.pad0 {
+    padding: 0px !important;
+}
+
+.noResultsText {
+    color: #333;
+    font-weight: 200;
+    line-height: 1.5;
+    padding-left: 5px;
+    padding-right: 30px;
+    position: absolute;
+    top: 7%;
+    margin-left: 1.5%;
+    overflow-y: auto;
+    min-height: 151px;
+    max-height: 151px;
+}
+
+.homeAppMenuFlyout {
+    position: absolute;
+    z-index: 101;
+    /*display: none;*/
+    width: 250px;
+    height: 200px !important;
+    box-sizing: border-box;
+    background-color: #fff;
+    padding: 10px;
+    top: 34px !important;
+    border: 1px solid #d1d1d1;
+}
+
+.AppFlyoutLinks {
+    display: table !important;
+    padding-bottom: 20px !important;
+}
+
+.AppFlyoutLinksText {
+    font-size: 18px !important;
+    color: #2b579a !important;
+}
+
+.lazyLoading {
+    position: absolute;
+    background-color: transparent;
+    color: #6c6c6c;
+    font-weight: lighter;
+    height: 30px;
+    left: 50%;
+    text-align: center;
+    vertical-align: middle;
+    width: 30px;
+    bottom: -30px; /* Provided negative bottom for alignment of loading image for lazy loading implementation */
+}
+
+.ui-grid-header-viewport {
+    overflow: hidden;
+    cursor: default;
+}
+
+.ui-grid-top-panel {
+    overflow: hidden;
+    background: #fff;
+}
+
+#loadingImageContainer {
+    position: absolute;
+    left: 40%;
+    top: 50%;
+}
+
+.ngViewport {
+    overflow: visible;
+}
+
+.searchPanelDropdown {
+    cursor: pointer;
+    height: 30px;
+    line-height: 29px;
+    padding-left: 9px;
+    border: none;
+}
+
+.form-control {
+    border-radius: 0;
+}
+
+#filterResultsContainer {
+    max-height: 219px;
+    min-height: 0;
+    overflow-y: auto;
+    clear: both;
+    position: relative;
+}
+
+    #filterResultsContainer .filterValueLabels, #filterResultsContainer .bufferElements, #filterResultsContainer .filterFlyOutNoResults {
+        margin: 10px 0 0 10px;
+    }
+
+.filterFlyOutNoResults {
+    font-family: "Segoe UI Web Semilight", "Segoe UI Semilight", "Segoe WP Semilight", "Segoe UI", "Segoe WP", Tahoma, Arial, sans-serif;
+    width: 220px;
+    white-space: nowrap;
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
+.folderContent ul {
+    margin: 0;
+    padding-left: 0;
+    text-align: left;
+    list-style: none;
+}
+
+.ui-grid, .ui-grid-header-cell, .ui-grid-header, .ui-grid-cell {
+    border: none;
+}
+
+/*#documentgrid .ui-grid, #mattergrid .ui-grid {
+    height: 520px;
+}*/
+
+.ui-grid-cell {
+    height: 48px;
+    white-space: normal;
+    -ms-text-overflow: clip;
+    -o-text-overflow: clip;
+    text-overflow: clip;
+    overflow: visible;
+}
+
+.txtellipsis {
+    white-space: nowrap;
+    text-align: left;
+    text-overflow: ellipsis;
+    height: 100%;
+    overflow: hidden;
+    color: #2b579a !important;
+}
+
+.UiGrid-a {
+    text-align: center;
+    width: 30px;
+    min-width: 30px;
+    max-width: 30px;
+    padding: 11px 0 7px 0 !important;
+    color: black;
+    font-weight: bold;
+    cursor: pointer !important;
+    text-decoration: none !important;
+}
+
+    .UiGrid-a:hover {
+        background-color: #bcd9ed;
+    }
+
+.ui-grid-row:nth-child(odd) .ui-grid-cell {
+    background-color: #fff;
+}
+
+.ui-grid-row:nth-child(even) .ui-grid-cell {
+    background-color: #fff;
+}
+
+.title {
+    margin: 0px 10px 0 10px;
+}
+
+.ui-grid-header-cell-label {
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.ui-grid-header-cell-wrapper {
+    color: #333;
+    font-family: 'Segoe UI Web Regular','Segoe UI','Segoe WP',Tahoma,Arial,sans-serif;
+}
+
+.ui-grid-canvas {
+    color: #333;
+    font-family: 'Segoe UI Web Regular','Segoe UI','Segoe WP',Tahoma,Arial,sans-serif;
+    font-size: 0.875em;
+    font-weight: 400;
+    /*max-width: 1900px;*/
+}
+
+.ui-grid-viewport {
+    /*min-height: 20px;*/
+}
+
+.overflowMain {
+    /*overflow: hidden !important;*/
+}
+
+.padlf10 {
+    padding-left: 10px !important;
+}
+
+#searchBarHolder input {
+    max-width: 310px;
+    text-overflow: ellipsis;
+    border: none;
+}
+
+/*.ui-grid-menu-button {
+    top: 54px;
+}*/
+
+.dropdown-menu .ms-ContextualMenu-item a:hover:not(.is-disabled) {
+    background-color: #cde6f7 !important;
+    color: #333 !important;
+    font-family: "Segoe UI Semibold","Segoe UI Web Semibold" !important;
+}
+
+.popover {
+    max-width: 400px;
+    max-height: 278px;
+    border-radius: 2px;
+}
+
+.popover-title {
+    padding: 0;
+    margin: 0;
+    border-bottom: 0;
+}
+
+.popover-content {
+    padding: 0;
+}
+
+.UiGrid-a .dropdown-menu {
+    margin: 0;
+    padding: 0;
+}
+
+/*.ui-grid-render-container{
+    height:500px;
+}*/
+
+.padl10px {
+    padding-left: 10px;
+}
+
+#mainmenu {
+    margin: 0;
+    padding: 10px 0 0 10px;
+}
+
+    #mainmenu input {
+        max-width: none;
+    }
+
+    #mainmenu .AppMenuFlyout {
+        left: 15px;
+    }
+
+#contentDiv input {
+    max-width: none;
+}
+
+.searchdashboard {
+    padding-top: 15px;
+    cursor: default;
+}
+
+.dashboarddrop {
+    position: absolute;
+    top: 48px;
+    padding: 0 8px 1px 15px;
+    z-index: 5;
+}
+
+.dashboarddropForTeam {
+    position: absolute;
+    top: 111px;
+    padding: 0 8px 1px 15px;
+    z-index: 5;
+}
+
+.dashboarddropinner {
+    z-index: 1000;
+    background: #fff;
+    border: 1px solid #ccc;
+}
+
+.pad15 {
+    padding: 15px;
+}
+
+.pad10 {
+    padding: 10px;
+}
+
+.dashboardSearch {
+    width: 80px;
+    background: #0072c6;
+    padding: 5px 0 5px 0px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 0.875em;
+    text-align: center;
+    font-weight: 600;
+    font-family: Segoe UI;
+}
+.dashboardCancelBtn{
+    margin-left:10px;
+}
+
+.clientdropinner {
+    position: absolute;
+    top: -11px;
+    left: 16.6%;
+    border: 1px solid #ccc;
+    z-index: 10;
+    background: #fff;
+    padding-bottom: 10px;
+}
+
+.sortby {
+    position: absolute;
+    top: 30px;
+    padding: 0;
+}
+
+.docsortby {
+    position: absolute;
+    top: 82px;
+    padding: 0;
+}
+.docsortbydashboard{
+    left: -30px ;
+    top:36px ;
+}
+
+.sortbymatters {
+    position: absolute;
+    top: 80px;
+    padding: 0;
+}
+
+.sortby .btn {
+    padding: 1px 12px;
+}
+
+.img-xls {
+    float: right;
+    padding-left: 5px;
+}
+
+.padtop20 {
+    padding-top: 20px;
+}
+
+.padtop5 {
+    padding-top: 5px;
+}
+
+.sortby ul, .sortbymatters ul, .docsortby ul {
+    background-color: #fff;
+    border: 1px solid #c8c8c8;
+    position: absolute;
+    left: 8px;
+    z-index: 1;
+    list-style: none;
+    padding: 0;
+    margin-top: 5px;
+}
+
+    .sortby ul li:hover, .sortbymatters ul li:hover, .docsortby ul li:hover {
+        background-color: #eaecea;
+        cursor: pointer;
+    }
+
+    .sortby ul li, .sortbymatters ul li, .docsortby ul li {
+        padding: 5px 10px 5px 10px;
+        color: #333;
+        display: inline-block;
+        float: right;
+        font-size: 0.87em;
+        font-family: "Segoe UI";
+        text-align: left;
+        width: 118px;
+    }
+
+.overflowMain a:hover {
+    text-decoration: none;
+}
+
+.cartelementpopup {
+    margin: 10px;
+    font-family: "Segoe UI Semilight", "Segoe UI";
+    font-weight: 400;
+    width: 250px !important;
+}
+
+.marleft10 {
+    margin-left: 10px;
+}
+
+.emailLink {
+    text-decoration: none !important;
+}
+
+.mainselect select option {
+    min-height: 100px !important;
+    font-weight: 600;
+    height: 60px !important;
+}
+
+.dpbtn {
+    background: #fff;
+    border: 1px solid #ccc;
+    padding-right: 18px;
+    margin-left: 0 !important;
+}
+
+#mainselect .open > .dropdown-toggle.btn-default:hover, .btn-default:active:focus, .btn-default.active:focus, .open > .dropdown-toggle.btn-default:focus, .btn-default:active.focus, .btn-default.active.focus, .open > .dropdown-toggle.btn-default.focus,
+#searchBarHolder .open > .dropdown-toggle.btn-default:hover, .btn-default:active:focus, .btn-default.active:focus, .open > .dropdown-toggle.btn-default:focus, .btn-default:active.focus, .btn-default.active.focus, .open > .dropdown-toggle.btn-default.focus {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+
+#mainselect .btn-default:hover, #searchBarHolder .btn-default:hover {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+
+#mainselect ul, #searchBarHolder ul {
+    margin: 0;
+    border-radius: 0px;
+    padding: 0;
+}
+
+    #mainselect ul li:hover, #searchBarHolder ul li:hover {
+        background-color: #cde6f7;
+        font-family: "Segoe UI Semibold", "Segoe UI Web Semibold" !important;
+        color: #333;
+    }
+
+.dpselected {
+    background-color: #cde6f7;
+    font-family: "Segoe UI Semibold", "Segoe UI Web Semibold" !important;
+    color: #333;
+}
+
+#searchmatter ul, #docsearchmatter ul {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+}
+
+    #docsearchmatter ul li a, #searchmatter ul li a {
+        height: 30px;
+        padding: 5px 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+        #searchmatter ul li a:hover {
+            background-color: #cde6f7 !important;
+            font-family: "Segoe UI Semibold", "Segoe UI Web Semibold" !important;
+            color: #333 !important;
+        }
+
+#searchmatter .active {
+    background-color: #cde6f7 !important;
+}
+
+#searchmatter .dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus {
+    color: #333;
+    text-decoration: none;
+    background-color: #cde6f7 !important;
+    outline: none;
+}
+
+.PersonalInfoFlyout {
+    position: absolute;
+    z-index: 101;
+    width: 400px;
+    height: 150px;
+    background-color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 1px solid #d1d1d1;
+    right: 30px;
+    top: 40px;
+    box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.47);
+    cursor: default;
+}
+
+.ContextualHelp {
+    border: 1px #d1d1d1;
+    position: absolute;
+    z-index: 102;
+    max-height: 442px;
+    max-width: 370px;
+    top: 5px;
+    right: 5px;
+    background: #fff;
+    box-shadow: 0 0 7px 0 #888888;
+    overflow-y: auto;
+}
+
+#docgrid .ui-grid, #mattersGrid .ui-grid {
+    height: 960px !important;
+}
+
+#docgrid .ui-grid-viewport, #mattersGrid .ui-grid-viewport {
+    overflow: hidden !important;
+}
+
+.mattersdrop {
+    position: absolute;
+    list-style: none;
+    border: 1px solid #ccc;
+    z-index: 1;
+    background: #fff;
+    top: 33px;
+    right: 0;
+}
+
+.searchwidth {
+    min-width: 240px;
+    max-width: 240px;
+    border: 1px solid #ccc;
+}
+
+#searchBarHolder button {
+    border: none;
+    background: #fff !important;
+    outline: none;
+}
+
+#mainmenu {
+    min-width: 310px;
+}
+
+.bodymain {
+    overflow: hidden;
+}
+
+#uploadToMatter, #viewMatters {
+    color: #fff !important;
+    font-family: 'Segoe UI Web Semibold','Segoe UI Semibold','Segoe WP Semibold','Segoe UI','Segoe WP',Tahoma,Arial,sans-serif;
+    font-size: 14px;
+    text-decoration: none !important;
+}
+
+.popcontent {
+    position: absolute;
+    top: 0px;
+    background: #fff;
+    z-index: 1001;
+    border: 1px solid #ccc;
+}
+
+.flyoutwidth {
+    width: 350px;
+}
+
+.headerfilter {
+    position: absolute;
+    top: 12px;
+    padding-left: 5px;
+}
+
+.sorticon {
+    float: right;
+    display: block !important;
+    right: 30px;
+    position: relative;
+}
+
+.marginTop20 {
+    margin-top: 20px !important;
+}
+
+#Flyoutheader {
+    position: absolute;
+    height: 174px;
+    width: 1150px !important;
+    background-color: #fff;
+    top: 60px;
+    padding: 22px 20px;
+    z-index: 10;
+}
+
+.padlf0 {
+    padding-left: 0 !important;
+}
+
+.searchIcon {
+    padding: 6px !important;
+    cursor: pointer;
+}
+
+#Mainflyout {
+    position: absolute;
+    height: 174px;
+    width: 1148px !important;
+    background-color: #fff;
+    top: 60px;
+    padding: 22px 20px;
+    z-index: 10;
+}
+
+.maincontentDiv {
+    font-family: 'Segoe UI';
+    margin: 20px auto 0 auto;
+    padding: 0 16px;
+    position: relative;
+    max-width: 1150px;
+}
+
+.footerMaincontentDiv {
+    font-family: 'Segoe UI';
+    margin: 0px auto 0 auto;
+    padding: 0 16px;
+    position: relative;
+    max-width: 1150px;
+}
+
+#searchText {
+    font-family: Arial;
+    color: #000;
+}
+
+.jsonGridFooter {
+    margin-left: 7px !important;
+}
+
+.footerLinks {
+    /*padding-top: 13px !important;*/
+    margin-bottom: 10px;
+}
+
+#menuitem-1 button {
+    font-family: "Segoe UI Web Semibold", "Segoe UI Semibold", "Segoe WP Semibold", "Segoe UI", "Segoe WP", Tahoma, Arial, sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    color: #333 !important;
+    cursor: default;
+}
+
+#mainmenu .AppMenuFlyout {
+    top: 34px !important;
+}
+
+#mainmenu .btn {
+    padding: 4px 12px;
+}
+
+#mainmenu .form-control {
+    height: 30px;
+}
+
+#gridViewPageHeaderContainer {
+    margin-top: 11px;
+    cursor: default !important;
+}
+
+.MenuCaption {
+    position: absolute;
+}
+
+.marginRight10 {
+    margin-right: 10px;
+}
+
+.defaultSection {
+    width: 100% !important;
+}
+
+.mainSearch input {
+    max-width: 100% !important;
+}
+
+.WelcomeBar {
+    padding: 2px 10px 5px 10px !important;
+}
+
+#HeaderPlaceHolder {
+    display: none !important;
+}
+
+.topheader {
+    padding-top: 10px;
+    margin: 0 0px 0 -5px;
+    position: relative;
+    z-index: 5;
+}
+
+.padlf40 {
+    padding-left: 40px !important;
+}
+
+.AppHeader {
+    min-width: 280px !important;
+}
+
+#HeaderPlaceHolder {
+    min-width: 226px !important;
+}
+
+.zindex6 {
+    z-index: 6;
+}
+
+.height155 {
+    height: 200px !important;
+}
+
+.height200 {
+    height: 200px !important;
+}
+
+.marginTop7 {
+    margin-top: 7px;
+}
+
+.addMoreLinks {
+    float: right;
+    margin-top: 10px;
+    padding: 0px;
+}
+
+.settingserror {
+    padding: 25px;
+    color: red;
+}
+
+.closebutton {
+    float: right !important;
+    text-decoration: none !important;
+}
+
+.displayDocTabs {
+    width: 12px;
+    position: absolute;
+    top: 33px;
+    right: 1px;
+    left: 175px;
+    cursor: pointer;
+    margin-left: 28px;
+    z-index: 5;
+}
+
+
+.switchHideTab {
+    cursor: pointer;
+    float: none;
+    font-weight: 400;
+    background-color: #fff;
+    border: 2px solid silver;
+    position: absolute;
+    width: 145px;
+    z-index: 100;
+    top: 55px !important;
+    left: 182px !important;
+}
+
+
+.ui-grid-cell-contents {
+    overflow: hidden !important;
+}
+
+.displayMatterTabs {
+    width: 12px;
+    position: absolute;
+    top: 84px;
+    right: 1px;
+    left: 133px;
+    cursor: pointer;
+    margin-left: 28px;
+    z-index: 5;
+}
+
+.switchHideMatterTab {
+    cursor: pointer;
+    float: none;
+    font-weight: 400;
+    background-color: #fff;
+    border: 2px solid silver;
+    position: absolute;
+    width: 145px;
+    z-index: 100;
+    top: 105px !important;
+    left: 176px !important;
+}
+
+.xOverflowAuto {
+    overflow-x: auto;
+}
+
+.navtabs ul li {
+    z-index: 3;
+    /*outline: none !important;*/
+}
+
+    .navtabs ul li a {
+        outline: none !important;
+    }
+
+.dashboardXOverFlow {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+#matterMain div, #matterMain figure {
+    outline: none !important;
+} 
+
+#matterCenterHeader div :focus {
+    outline: dotted !important;
+}
+.ui-grid-icon-container:focus{
+          border: 1px dashed !important;
+          speak-as:spell-out
+    }
+
+.mainsort {
+    position: absolute;
+    top: 0px;
+}
+
+#documentAuthorDiv ul {
+    width: 96%;
+}
+
+#divDashboardSearch ul {
+    width: 100%;
+}
+
+#divMatterDashboardSearch ul {
+    width: 100%;
+}
+
+.footerMargin {
+    margin-right: 19.5% !important;
+}
+
+.padright0 {
+    padding-right: 0 !important;
+}
+
+.docSortbyWidth {
+    min-width: 656px;
+}
+
+.docSortbyText {
+    max-width: 192px;
+    min-width: 118px;
+    float: right;
+    text-align: right;
+}
+
+.docExportIcon {
+    min-width: 20px;
+    max-width: 20px;
+    float: right;
+    margin-right: 10px;
+}
+
+.docDashboardLoader {
+    top: 25%;
+    left: 47%;
+}
+
+.docDashboardInnerLoader {
+    position: absolute;
+    top: 31%;
+    left: 40%;
+}
+
+.jsonGridFooterNew {
+    position: absolute;
+    min-width: 64px;
+    max-width: 133px;
+}
+
+.fromToPageWidth {
+    min-width: 64px;
+    max-width: 133px;
+}
+
+.docFromToPageWidth {
+    min-width: 43px;
+    max-width: 133px;
+}
+
+#mainDivContainer {
+    cursor: default;
+}
+
+.headerLinks > span {
+    outline: none !important;
+}
+
+#settingsLink span {
+    outline: none !important;
+}
+
+#PersonaPicture {
+    cursor: default;
+}
+
+.AppLogo {
+    cursor: default;
+}
+
+.modal-content {
+    cursor: default;
+}
+
+.ms-ContextualMenu-link {
+    max-width: 165px !important;
+}
+
+#matcoltemp .ms-ContextualMenu-link {
+    max-width: 178px !important;
+}
+
+#InfoImg img {
+    cursor: default;
+}
+
+#grid_Grid_ViewRecords {
+    text-align: center;
+}
+
+#menuitem-1 button {
+    box-shadow: none !important;
+}
+
+.cartFileTxtLabel {
+    max-width: 90%;
+    overflow: hidden;
+    float: left;
+}
+
+.mailContentPopUpBody {
+    max-height: 350px;
+}
+
+.loadingIconMatterUsers {
+    left: 45%;
+    top: 35%;
+}
+
+.loadingImgExplicit {
+    bottom: 65% !important;
+}
+
+.footer {
+    margin: 0 !important;
+}
+
+.PersonaPictureDetails div {
+    max-width: 274px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.noCursor {
+    cursor: not-allowed;
+}
+
+.homeCloseContextualHelpFlyout {
+    position: absolute;
+    float: right;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+    color: #666;
+    font-size: 15px;
+}
+
+
+#mainselect .dropdown-menu {
+    min-width: 148px;
+}
+
+#mattersGrid .ui-grid-cell-contents, #Documents .ui-grid-cell-contents {
+    cursor: default;
+}
+
+#matcoltemp ul {
+    margin: 0;
+    padding: 0;
+    min-height: 156px !important;
+    max-width: 180px !important;
+    min-width: 180px !important;
+    max-height: 156px !important;
+}
+
+.hideUploadImg {
+    opacity: 0.45;
+    cursor: default;
+}
+
+input[type=checkbox]:focus, input[type=radio]:focus,a.ms-Button:focus, button:focus, li:focus,#viewMatters:focus,#uploadToMatter:focus{
+    outline:dotted 3px !important;
+}
+
+.offscreen {
+        display:none
+    }
+
+.gridHeaderColumnsFloat {
+        float:left
+    }
+
+.dropdown-menu-home {
+    top: 100%;
+    left: 0px;
+    z-index: 1000;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;    
+}
+
+.height222 {
+    height: 222px !important;
+}
+.tabActive{
+   outline: 1px black !important;
+}
+
+.tabInActive{
+   outline: none !important;
+}
+
+a.skip-main {
+    left:-999px;
+    position:absolute;
+    top:auto;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+    z-index:-999;
+}
+a.skip-main:focus, a.skip-main:active {
+    color: #fff;
+    background-color:#0072c6;
+    left: auto;
+    top: auto;
+    width: auto;
+    height: auto;
+    overflow:auto;
+    margin: 10px 35%;
+    padding:5px;
+    border-radius: 0px;
+    border:px solid #2b579a;
+    text-align:center;
+    font-size:1.0em;
+    z-index:100000;
+}
+
+::-webkit-input-placeholder { /* Chrome */
+      color:  #505050 !important;
+      opacity: 1;
+    }
+    :-ms-input-placeholder { /* IE 10+ */
+      color:  #505050 !important;
+      opacity: 1;
+    }
+    ::-moz-placeholder { /* Firefox 19+ */
+      color:  #505050 !important;
+      opacity: 1;
+    }
+    :-moz-placeholder { /* Firefox 4 - 18 */
+      color:  #505050 !important;
+      opacity: 1;
+    }
+
+    .showDocDashboard:focus{
+        border:1ps dotted black;
+    }
+

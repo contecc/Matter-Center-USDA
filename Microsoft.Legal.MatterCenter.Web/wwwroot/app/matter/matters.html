@@ -1,0 +1,646 @@
+<style>
+    .topheader {
+        position: absolute !important;
+        width: 100%;
+    }
+
+    #matcoltemp:focus {
+        border: 1px dashed !important;
+    }
+</style>
+<head>
+    <title>{{vm.navigationContent.Image1Title}}</title>
+</head>
+<div ng-click="vm.closealldrops()">
+    <!--ng-class="{'mainMatter':vm.lazyloader}"-->
+
+    <div class="row" ng-init="initOfficeLibrary()">
+        <div class="row" tabindex="0" id="mainmenu">
+            <div class="col-xs-2 col-sm-3 col-md-3 col-lg-2 pad0" role="region">
+                <div class="col-sm-offset-3 col-md-offset-3 col-lg-offset-3 col-sm-9 col-md-9 col-lg-9 hidden-xs pad0" id="mainselect">
+                    <div class="input-group-btn zindex6" id="comboMattersOpt" ng-keydown="vm.mattersCombobox($event,0)">
+                        <div tabindex="0" role="combobox" class="btn btn-default dropdown-toggle col-sm-12 col-md-12 col-lg-12 dpbtn" data-toggle="dropdown">
+                            <span role="listitem" class="col-sm-12 col-md-12 text-left pad0 ms-font-weight-semilight">{{vm.mattername}}</span>
+                            <span class="caret"></span>
+                        </div>
+                        <ul role="menu" tabindex="-1" class="dropdown-menu pull-right col-sm-12 col-md-12 col-lg-12">
+                            <li>
+                                <a aria-label="{{vm.matterConfigContent.Dropdown1Item1}}"
+                                   class="searchPanelDropdown ms-font-weight-semilight" ng-class="{'dpselected':vm.mattername==vm.matterConfigContent.Dropdown1Item1}"
+                                   href="" tabindex="0" aria-live="assertive" aria-atomic="true" role="menuitem"
+                                   ng-click="vm.SetMatters(1,vm.matterConfigContent.Dropdown1Item1)">
+                                    {{vm.matterConfigContent.Dropdown1Item1}}
+                                </a>
+                            </li>
+                            <li>
+                                <a aria-label="{{vm.matterConfigContent.Dropdown1Item2}}"
+                                   class="searchPanelDropdown ms-font-weight-semilight" ng-class="{'dpselected':vm.mattername==vm.matterConfigContent.Dropdown1Item2}" ng-click="vm.SetMatters(2,vm.matterConfigContent.Dropdown1Item2)"
+                                   href="" tabindex="0" aria-live="assertive" aria-atomic="true" role="menuitem">
+                                    {{vm.matterConfigContent.Dropdown1Item2}}
+                                </a>
+                            </li>
+                            <li>
+                                <a class="searchPanelDropdown ms-font-weight-semilight" ng-class="{'dpselected':vm.mattername==vm.matterConfigContent.Dropdown1Item3}" ng-keydown="vm.mattersCombobox($event,3)" ng-click="vm.SetMatters(3,vm.matterConfigContent.Dropdown1Item3)"
+                                   aria-label="{{vm.matterConfigContent.Dropdown1Item3}}"
+                                   href="" tabindex="0" aria-live="assertive" aria-atomic="true" role="menuitem">
+                                    {{vm.matterConfigContent.Dropdown1Item3}}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div tabindex="0" class="col-sm-5 col-md-4 col-lg-4 hidden-xs" role="region">
+                <div class="input-group col-xs-10 col-sm-12 zindex6" id="searchmatter">
+                    <input type="text" tabindex="0" role="textbox" aria-label="{{vm.matterConfigContent.SearchPlaceholderText}}" ng-model="vm.selected" ng-disabled="!vm.lazyloader" my-enter="vm.search()" placeholder="{{vm.matterConfigContent.SearchPlaceholderText}}" uib-typeahead="searchMatters.matterName + ' ('+ searchMatters.matterID + ')' for searchMatters in vm.searchMatter($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="noResults" typeahead-on-select='vm.typeheadselect($item, $model)' class="form-control">
+                    <span class="input-group-addon cursor" tabindex="0"  aria-label="{{vm.matterConfigContent.AriaLabelSearchMatterButton}}" alt="searchmatter"  id="basic-addon1" ng-click="vm.search()"><i alt="searchmatter"  class="glyphicon glyphicon-search"></i></span>
+                </div>
+                <div class="col-xs-12">
+                </div>
+            </div>
+            <div id="searchBarHolder" class="col-xs-5 hidden-md hidden-lg hidden-sm pad0 searchwidth" role="region">
+                <div class="input-group col-xs-12 zindex6">
+                    <input type="text" 
+                           aria-autocomplete="list" 
+                           aria-live="assertive"
+                           aria-atomic="true"
+                           aria-haspopup="true"
+                           ng-model="vm.selected" 
+                           ng-disabled="!vm.lazyloader" 
+                           my-enter="vm.search()" 
+                           placeholder="{{vm.matterConfigContent.SearchPlaceholderText}}" 
+                           uib-typeahead="matterDataList.matterName + ' ('+ matterDataList.matterID + ')' for matterDataList in vm.searchMatter($viewValue)" 
+                           typeahead-loading="loadingLocations" 
+                           typeahead-no-results="noResults" 
+                           typeahead-focus-first="true"
+                           typeahead-min-length='3'
+                           aria-label="{{vm.matterConfigContent.SearchPlaceholderText}}"
+                           spellcheck="true"
+                           autocomplete="off"
+                           class="form-control">
+                    <div class="input-group-btn">
+                        <button tabindex="0"  aria-label="{{vm.matterConfigContent.AriaLabelSearchMatterButton}}" class="btn btn-default" alt="searchmatter"  ng-click="vm.search()"><i alt="searchmatter"  class="glyphicon glyphicon-search"></i></button>
+                        <div tabindex="0" role="combobox" class="btn btn-default" data-toggle="dropdown" ng-click="vm.showmatterdrop($event)">
+                            <span class="caret"></span>
+                        </div>
+                    </div>
+                </div>
+                <ul tabindex="-1" class="col-xs-12 mattersdrop" ng-show="vm.mattersdrop">
+                    <li role="listitem" aria-label="{{vm.matterConfigContent.AriaLabelDropdown1Item1}}" class="searchPanelDropdown ms-font-weight-semilight" ng-class="{'dpselected':vm.mattername==vm.matterConfigContent.Dropdown1Item1}" ng-click="vm.SetMatters(1,vm.matterConfigContent.Dropdown1Item1)">{{vm.matterConfigContent.Dropdown1Item1}}</li>
+                    <li role="listitem" aria-label="{{vm.matterConfigContent.AriaLabelDropdown1Item2}}" class="searchPanelDropdown ms-font-weight-semilight" ng-class="{'dpselected':vm.mattername==vm.matterConfigContent.Dropdown1Item2}" ng-click="vm.SetMatters(2,vm.matterConfigContent.Dropdown1Item2)">{{vm.matterConfigContent.Dropdown1Item2}}</li>
+                    <li role="listitem" aria-label="{{vm.matterConfigContent.AriaLabelDropdown1Item3}}" class="searchPanelDropdown ms-font-weight-semilight" ng-class="{'dpselected':vm.mattername==vm.matterConfigContent.Dropdown1Item3}" ng-click="vm.SetMatters(3,vm.matterConfigContent.Dropdown1Item3)">{{vm.matterConfigContent.Dropdown1Item3}}</li>
+                </ul>
+                <div class="col-xs-12">
+                    <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row title">
+        <h1  class="col-sm-12" id="gridViewPageHeaderContainer" role="heading">
+            <span aria-label="The below gird will display {{vm.mattername}}" role="heading" class="add-margin-bottom">{{vm.mattername}}</span>
+        </h1>
+    </div>
+    <div class="row" id="mattergrid" role="region">
+        <div class="col-sm-12" ng-if="vm.divuigrid" role="grid" aria-readonly="true">
+            <div ui-grid="vm.gridOptions"  ui-grid-exporter 
+                 aria-labelledby="gridViewPageHeaderContainer"
+                 ui-grid-selection
+                 data-ui-grid-infinite-scroll
+                 class="grid"
+                 aria-label="The grid will display matters based on the matter type that has been selected and grid is having sorting, filtering and pagination functionality"
+                 ng-style="vm.getTableHeight()"
+                 role="presentation" >
+                <div class="col-xs-12 col-sm-12 noResultsText" ng-show="vm.nodata" ng-bind-html="vm.matterConfigContent.NoDataSearchText"
+                     aria-live="assertive"
+                     aria-atomic="true"
+                     aria-label="no search results found">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <onload sortdetails="{{vm.sortexp}}"></onload>
+
+    <!--Upload Modal Screen Start-->
+    <div class="modal fade" id="UploadMatterModal" tabindex="-1" role="region">
+
+        <div class="modal-dialog modal-lg" style="width:100%;margin:0px;" id="">
+            <div ng-if="vm.IsDupliacteDocument" class="notificationContainerForPopup" role="alert" style="height: 80px;margin-left:0" aria-hidden="true">
+
+                <script type="text/ng-template" id="duplicateErrorDiv">
+                    <div class="notification warningNotification" ng-show="duplicatefile.cancel!==null" aria-hidden="true">
+                        <img id="warningImg" draggable="false" alt="{{vm.matterConfigContent.ImageWarningAltText}}" src="../Images/warning-message.png">
+                        <div id="overWriteDocumentName">
+                            <div ng-bind-html="duplicatefile.value"></div>
+                        </div>
+                        <div class="notificationResult hide"></div>
+                        <div class="askForOverwrite">
+                            <input ng-show="duplicatefile.contentCheck=='True'"
+                                   type="button" 
+                                   title="{{vm.matterConfigContent.Button1DuplicateContentTitle}}"
+                                   value="{{vm.matterConfigContent.Button1DuplicateContentText}}"
+                                   data-operation="contentCheck" ng-click="vm.localOverWriteDocument(duplicatefile,'contentCheck');vm.contentCheckNotification(duplicatefile,true);">
+                            <input ng-show="duplicatefile.saveLatestVersion=='True'"
+                                   title="{{vm.matterConfigContent.Button2SaveLatestVersionTitle}}"
+                                   id="overWriteYes"
+                                   ng-click="vm.localOverWriteDocument(duplicatefile,'overwrite');"
+                                   type="button" value="{{vm.matterConfigContent.Button2SaveLatestVersionText}}"
+                                   data-operation="overwrite">
+                            <input ng-show="duplicatefile.append==true"
+                                   type='button' data-operation='append' 
+                                   title='{{vm.matterConfigContent.Button3AppendDateTitle}}'
+                                   value="{{vm.matterConfigContent.Button3AppendDateText}}" ng-click="vm.localOverWriteDocument(duplicatefile,'append')" />
+                            <input ng-show="duplicatefile.cancel=='True'"
+                                   title="{{vm.matterConfigContent.Button4CancelUploadTitle}}"
+                                   id="overWriteNo" 
+                                   ng-click="vm.localOverWriteDocument(duplicatefile,'ignore');"
+                                   type="button"
+                                   value="{{vm.matterConfigContent.Button4CancelUploadText}}"
+                                   data-operation="ignore">
+
+                            <input ng-show="duplicatefile.ok=='True'"
+                                   title="{{vm.matterConfigContent.Button5OkTitle}}"
+                                   id="ok"
+                                   ng-click="vm.localOverWriteDocument(duplicatefile,'ok');"
+                                   type="button" value="{{vm.matterConfigContent.Button5OkText}}"
+                                   data-operation="ignore">
+                            <div ng-show="duplicatefile.contentCheck=='contentCheck'" class='notificationCC'>
+                                <img src="../Images/loadingcirclests16.gif" alt="" />{{vm.matterConfigContent.Image1ContentCheckText}}  <input id='cancelCC' type='button' value='{{vm.matterConfigContent.Button6CancelText}}' ng-click='vm.abortContentCheck(duplicatefile,true)' />
+                            </div>
+                        </div>
+                    </div>
+                </script>
+
+                <div ng-repeat="duplicatefile in vm.ducplicateSourceFile" ng-include="'duplicateErrorDiv'"></div>
+
+            </div>
+
+            <div class="modal-content" role="region">
+                <div ng-show="vm.oUploadGlobal.successBanner"
+                     tabindex="0"
+                     class="notification successNotification ms-font-weight-semibold successUpload" aria-hidden="true" aria-label="{{vm.matterConfigContent.UploadCompleteLabel1Text}}">
+
+                    {{vm.matterConfigContent.UploadCompleteLabel1Text}}
+                    <span class="closeNotification" ng-click="vm.closeSuccessBanner()">{{vm.matterConfigContent.CloseIconText}}</span>
+                </div>
+                <div class="row modalClose" role="region">
+                    <img data-dismiss="modal" tabindex="0"
+                         title="Close file upload dialog box"
+                         aria-label="Close file upload dialog box"
+                         ng-click="vm.hideBreadCrumb()"
+                         class="pull-right" src="../../images/close-666.png" />
+                </div>
+                <div class="modal-body modelbodyContainer" role="region">
+                    <div class='loadingprogressbar' ng-if="vm.isLoadingFromDesktopStarted">
+                        <img aria-live="assertive"
+                             class='attachmentListLoading'
+                             src='../images/loading_metro.gif' />
+                    </div>
+                    <div class="row margin0">
+                        <div class="col-sm-10 pad0">
+                            <div class="attachmentHeader marginBottom15 fontSize875em">
+                                <h2 style="font-size:12px">{{vm.matterConfigContent.AttachmentPopupHeaderText}}</h2>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row margin0">
+                        <div class="col-sm-9 pull-left mailHeaderItems"><div>{{vm.matterConfigContent.AttachmentPopupHeaderItem1Text}}</div></div>
+                        <div class="col-sm-3 pull-left mailHeaderFolders"><div></div>{{vm.matterConfigContent.AttachmentPopupHeaderItem2Text}}</div>
+                    </div>
+
+                    <div class="row margin0">
+                        <div class="col-sm-9 maildata">
+                            <div ng-if="vm.loadingAttachments" class='mailContentDiv'><img alt='Loading' class='mailContentLoading' src='../images/loading_metro.gif' /></div>
+                            <!--Content start to show mail attachment information-->
+                            <div class="attachmentSection" ng-repeat="attachmentInfo in vm.allAttachmentDetails">
+
+                                <div ng-if="attachmentInfo.isEmail" class="attachment">
+                                    <div class="attachmentName mailName">
+                                        <img ng-hide="vm.mailUpLoadSuccess" title="{{vm.matterConfigContent.AttachmentEditImageTitle}}"
+                                             class="editUploadIcon" id="{{attachmentInfo.counter}}editIcon"
+                                             draggable="false"
+                                             tabindex="0" role="button"
+                                             ng-click="vm.editAttachment(this, $event)"
+                                             alt="{{vm.matterConfigContent.AttachmentEditImageAltText}}"
+                                             src="../Images/edit-666.png">
+                                        <img title="{{vm.matterConfigContent.AttachmentSaveImageTitle}}"
+                                             tabindex="0" role="button"
+                                             class="saveUploadIcon hide" id="{{attachmentInfo.counter}}saveIcon"
+                                             draggable="false"
+                                             ng-click="vm.saveAttachment(this, $event)" alt="{{vm.matterConfigContent.AttachmentSaveImageText}}" src="../Images/save-666.png">
+                                        <!--If the mail upload is success, show this div-->
+                                        <div ng-if="vm.mailUpLoadSuccess" class="uploadSuccessStatus" id="{{attachmentInfo.counter}}attachment-Status">
+                                            <img class="uploadSuccessStatus" alt="{{vm.matterConfigContent.AttachmentUploadSuccessfullyImageAltText}}" src="/images/success-message.png">
+                                        </div>
+                                        <img class="attachIcon attachIconMargin"
+                                             id="{{attachmentInfo.counter}}attachIcon"
+                                             alt="{{vm.matterConfigContent.AttachmentIconImageAltText}}" src="../Images/attach_icon-15x15_666.png">
+                                        <input class="popupName editPopupContent hide ui-draggable" tabindex="0"
+                                               role="textbox"
+                                               id="0attachmentText" type="text" maxlength="128">
+                                        <div title="{{vm.matterConfigContent.AttachmentTestTitle}}"
+                                             class="popupName ui-draggable"
+                                             id="{{attachmentInfo.counter}}attachment"
+                                             draggable
+                                             aria-grabbed="true"
+                                             tabindex="0"
+                                             aria-label="{{attachmentInfo.attachmentFileName}}"
+                                             data-isEmail="{{attachmentInfo.isEmail}}"
+                                             data-attachmentid="{{attachmentInfo.attachmentId}}" attachedfile="attachmentInfo">{{attachmentInfo.attachmentFileName}}</div>
+                                        <!--If the mail upload is success, show the folder name under which the email has been dropped-->
+                                        <div ng-if="vm.mailUpLoadSuccess" title="{{vm.mailUploadedFolder}}" class="uploadSuccessMessage" id="{{attachmentInfo.counter}}attachment-Message">{{vm.mailUploadedFolder}}</div>
+                                    </div>
+                                </div>
+
+                                <div ng-if="!attachmentInfo.isEmail" class="attachment">
+                                    <div class="attachmentName">
+                                        <img ng-hide="attachmentInfo.uploadSuccess" title="{{vm.matterConfigContent.AttachmentEditImageTitle}}" class="editUploadIcon" id="{{attachmentInfo.counter}}editIcon" draggable="false"
+                                             ng-click="vm.editAttachment(this, $event)" alt="{{vm.matterConfigContent.AttachmentEditImageAltText}}" src="../Images/edit-666.png">
+                                        <img title="{{vm.matterConfigContent.AttachmentSaveImageTitle}}" class="saveUploadIcon hide" id="{{attachmentInfo.counter}}saveIcon" draggable="false"
+                                             ng-click="vm.saveAttachment(this, $event)" alt="{{vm.matterConfigContent.AttachmentSaveImageText}}" src="../Images/save-666.png">
+                                        <div ng-show="attachmentInfo.uploadSuccess" class="uploadSuccessStatus" id="{{attachmentInfo.counter}}attachment-Status">
+                                            <img class="uploadSuccessStatus" alt="{{vm.matterConfigContent.AttachmentUploadSuccessfullyImageAltText}}" src="/images/success-message.png">
+                                        </div>
+                                        <!--If the attachment upload is success, show this div-->
+                                        <img class="attachIcon attachIconMargin" id="{{attachmentInfo.counter}}attachIcon" alt="{{vm.matterConfigContent.AttachmentIconImageAltText}}" src="{{attachmentInfo.iconSrc}}" fallbacksrc>
+                                        <input class="popupName editPopupContent hide ui-draggable" id="{{attachmentInfo.counter}}attachmentText" type="text" maxlength="128">
+                                        <div title="{{attachmentInfo.attachmentFileName}}"
+                                             id="{{attachmentInfo.counter}}attachment"
+                                             class="popupName ui-draggable "
+                                             draggable
+                                             aria-grabbed="true"
+                                             tabindex="0"
+                                             aria-label="{{attachmentInfo.attachmentFileName}}"
+                                             data-contentType="{{attachmentInfo.contentType}}"
+                                             data-size="{{attachmentInfo.size}}"
+                                             data-isEmail="{{attachmentInfo.isEmail}}"
+                                             data-attachmentid="{{attachmentInfo.attachmentId}}" attachedfile="attachmentInfo">{{attachmentInfo.attachmentFileName}}</div>
+                                        <!--If the attachment upload is success, show the folder name under which the attachment has been dropped-->
+                                        <div ng-show="attachmentInfo.uploadSuccess" title="{{vm.docUploadedFolder}}" class="uploadSuccessMessage">{{vm.docUploadedFolder}} </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Content end to show mail attachment information-->
+                            <!--Content start for showing the files which are uploaded from desktop-->
+                            <div class="attachmentSection" ng-show="!(vm.loadingAttachments)" role="region">
+                                <div ng-repeat="uploadedFile in vm.uploadedFiles" class="attachment">
+                                    <div class="attachmentName mailName" role="region">
+                                        <!--If the mail upload is success, show this div-->
+                                        <div ng-if="!uploadedFile.isError" class="uploadSuccessStatus">
+                                            <img class="uploadSuccessStatus" alt="{{vm.matterConfigContent.AttachmentImage3AltText}}" src="/images/success-message.png">
+                                        </div>
+                                        <img class="attachIcon" id="{{uploadedFile.counter}}attachIcon"
+                                             alt="attachment icon" src="{{uploadedFile.documentIconUrl}}" fallbacksrc>
+                                        <div title="{{uploadedFile.fileName}}" class="popupName " aria-atomic="true" aria-live="assertive"
+                                             aria-label="{{uploadedFile.fileName}} has been uploaded to {{uploadedFile.dropFolder}} folder">{{uploadedFile.fileName}}</div>
+                                        <!--If the mail upload is success, show the folder name under which the email has been dropped-->
+                                        <div ng-if="!uploadedFile.isError" title="{{uploadedFile.dropFolder}}" class="uploadSuccessMessage ">({{uploadedFile.dropFolder}})</div>
+                                    </div>
+                                </div>
+                                <div ng-hide="(vm.uploadedFiles.length || vm.allAttachmentDetails.length) " role="region">
+                                    <div title="" class="popupName" style="margin-left:1%;" aria-atomic="true" aria-live="assertive" tabindex="0">
+                                        {{vm.matterConfigContent.AttachmentEmptyText}}
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Content end for showing the files which are uploaded from desktop-->
+
+                        </div>
+                        <div class="col-sm-3 folderContent" role="region" aria-live="assertive" aria-atomic="true">
+                            <div id="breadcrumb" class="breadcrumb" ng-hide="breadcrumb">
+                                <img alt="{{vm.matterConfigContent.AttachmentBreadcrumAltText}}"
+                                     ng-click="hideBreadCrumb()"
+                                     id="rootLink" src="../Images/Return_Icon_23px_23px_666.png" title="<span class=&quot;content&quot;>cv vb</span>" draggable="false">
+                                <div id="parentFolder" class="breadcrumbItem"></div>
+                                <div id="breadcrumbSeparator"></div>
+                                <div id="currentFolder" class="breadcrumbItem"></div>
+                            </div>
+                            <div class="folderStructureContent" showbreadcrumb ng-hide="foldercontent">
+                                <script type="text/ng-template" id="folderTree">
+                                    <div tabindex="0" role="region" aria-hidden="true"
+                                         aria-label="{{child.name}} folder to which the documents can be uploaded"
+                                         aria-live="assertive"
+                                         aria-atomic="true" id="div{{child.name}}"
+                                         ng-if="child.parentURL!==null" class="treeNodes"
+                                         ng-show="child.active" title=""
+                                         droppable drop="handleDrop()" folder="child"
+                                         data-foldername="{{child.url}}"
+                                         data-parentname="{{child.parentURL}}"
+                                         aria-dropeffect="move"
+                                         ng-click="vm.showSelectedFolderTree(child)">
+                                        <img tabindex="0" class="folderIcon"
+                                             ng-src="{{vm.configsUri.SPOsiteURL}}/_layouts/15/images/folder.gif"
+                                             align="middle"
+                                             aria-label="{{child.name}} folder to which the documents can be uploaded"
+                                             alt="{{vm.matterConfigContent.AttachmentFolderAltText}}">
+                                        {{child.name}}
+                                    </div>
+                                    <ul ng-if="child.children" style="margin-left:5px;">
+                                        <li id='li{{child.name}}' ng-repeat="child in child.children" data-foldername="{{child.url}}" data-parentname="{{child.parentURL}}" droppable drop="handleDrop()" folder="child" class="childNode" ng-include="'folderTree'">
+
+                                        </li>
+                                    </ul>
+                                </script>
+                                <ul>
+                                    <li id='li{{child.name}}' ng-repeat="child in vm.foldersList" ng-class='child.parentURL?"childNode":"parentNode"' droppable data-foldername="{{child.url}}" data-parentname="{{child.parentURL}}" drop="handleDrop()" folder="child" ng-include="'folderTree'" style="display: inline-block; width: 90%; padding:0;">
+
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row margin0 marginTop15 fontSize875em">
+                        <div class="pull-left" id="InfoImg"><img src="../../images/information-blue.png" /> {{vm.matterConfigContent.AttachmentPopupFooterImageCapetion}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="loadingImageContainer">
+        <div class="lazyLoading" ng-hide="vm.lazyloader">
+            <img src="../Images/WindowsLoadingFast.GIF" alt="{{vm.matterConfigContent.AttachmentLoadingTitle}}" title="{{vm.matterConfigContent.AttachmentLoadingTitle}}" />
+        </div>
+    </div>
+    <div class="popupContainerBackground" ng-hide="vm.lazyloader"></div>
+    <div class="matterheader flyoutWrapper" style="position: absolute;top: 128px;background: #fff;z-index: 5;left: 10px;border: 1px solid #ccc;background-color: white;" ng-click='$event.stopPropagation();' ng-keydown="$event.keyCode==27?vm.matterheader=true:null" ng-hide="vm.matterheader">
+        <div class='input-group'>
+            <input aria-label="enter search criteria to filter by matter name" id="matMatterName" tabindex="0" role="textbox" class='form-control' my-Enter='vm.mattersearch(""+vm.configSearchContent.ManagedPropertyMatterName+":"+vm.searchTerm+"*("+vm.configSearchContent.ManagedPropertyMatterName+":* OR "+vm.configSearchContent.ManagedPropertyMatterId+":* OR "+vm.configSearchContent.ManagedPropertyClientName+":*)",vm.searchexp,false)' uib-typeahead="searchMatters.matterName for searchMatters in vm.filterSearch($viewValue)" ng-if="vm.filtername==vm.matterConfigContent.GridColumn1Header" ng-model='vm.searchTerm' placeholder='{{vm.matterConfigContent.FilterSearchPlaceholderText}}' />
+            <input aria-label="enter search criteria to filter by client name" id="matMatterClientName" role="textbox" tabindex="0" class='form-control' my-Enter='vm.mattersearch(""+vm.configSearchContent.ManagedPropertyClientName+":" + vm.clientSearchTerm + "*("+vm.configSearchContent.ManagedPropertyMatterName+":* OR "+vm.configSearchContent.ManagedPropertyMatterId+":* OR "+vm.configSearchContent.ManagedPropertyClientName+":*)",vm.searchexp,false)' uib-typeahead="searchMatters.matterClient for searchMatters in vm.filterSearch($viewValue)" ng-if="vm.filtername==vm.matterConfigContent.GridColumn3Header   && !vm.globalSettings.isBackwardCompatible" ng-model='vm.clientSearchTerm' placeholder='{{vm.matterConfigContent.FilterSearchPlaceholderText}}' />
+            <input aria-label="enter search criteria to filter by practice group " id="matPracticeGroup" role="textbox" tabindex="0" class='form-control' my-Enter='vm.mattersearch(""+vm.configSearchContent.ManagedPropertyPracticeGroup+":" + vm.practiceGroupSearchTerm + "*("+vm.configSearchContent.ManagedPropertyMatterName+":* OR "+vm.configSearchContent.ManagedPropertyMatterId+":* OR "+vm.configSearchContent.ManagedPropertyClientName+":*)",vm.searchexp,false)' uib-typeahead="searchMatters.matterClient for searchMatters in vm.filterSearch($viewValue)" ng-if="vm.filtername==vm.matterConfigContent.GridColumn2Header  && vm.globalSettings.isBackwardCompatible" ng-model='vm.practiceGroupSearchTerm' placeholder='{{vm.matterConfigContent.FilterSearchPlaceholderText}}' />
+            <input aria-label="enter search criteria to filter by responsible attorney" id="matRespAttorney" role="textbox" tabindex="0" class='form-control' my-Enter='vm.mattersearch(""+vm.configSearchContent.ManagedPropertyResponsibleAttorney+":" + vm.attorneySearchTerm + "*("+vm.configSearchContent.ManagedPropertyMatterName+":* OR "+vm.configSearchContent.ManagedPropertyMatterId+":* OR "+vm.configSearchContent.ManagedPropertyClientName+":*)",vm.searchexp,false)' uib-typeahead="searchMatters.matterClient for searchMatters in vm.filterSearch($viewValue)" ng-if="vm.filtername==vm.matterConfigContent.GridColumn5Header && !vm.globalSettings.isBackwardCompatible" ng-model='vm.attorneySearchTerm' placeholder='{{vm.matterConfigContent.FilterSearchPlaceholderText}}' />
+            <input aria-label="enter search criteria to filter by sub area of law" id="matSubAreaLaw" role="textbox" tabindex="0" class='form-control' my-Enter='vm.mattersearch(""+vm.configSearchContent.ManagedPropertySubAreaOfLaw+":" + vm.areaSearchTerm + "*("+vm.configSearchContent.ManagedPropertyMatterName+":* OR "+vm.configSearchContent.ManagedPropertyMatterId+":* OR "+vm.configSearchContent.ManagedPropertyClientName+":*)",vm.searchexp,false)' uib-typeahead="searchMatters.matterClient for searchMatters in vm.filterSearch($viewValue)" ng-if="vm.filtername==vm.matterConfigContent.GridColumn6Header && !vm.globalSettings.isBackwardCompatible" ng-model='vm.areaSearchTerm' placeholder='{{vm.matterConfigContent.FilterSearchPlaceholderText}}' />
+            <input aria-label="enter search criteria to filter by area of law" id="matAreaLaw" role="textbox" tabindex="0" class='form-control' my-Enter='vm.mattersearch(""+vm.configSearchContent.ManagedPropertyAreaOfLaw+":" + vm.areaOfLawSearchTerm + "*("+vm.configSearchContent.ManagedPropertyMatterName+":* OR "+vm.configSearchContent.ManagedPropertyMatterId+":* OR "+vm.configSearchContent.ManagedPropertyClientName+":*)",vm.searchexp,false)' uib-typeahead="searchMatters.matterAreaOfLaw for searchMatters in vm.filterSearch($viewValue)" ng-if="vm.filtername==vm.matterConfigContent.GridColumn3Header && vm.globalSettings.isBackwardCompatible" ng-model='vm.areaOfLawSearchTerm' placeholder='{{vm.matterConfigContent.FilterSearchPlaceholderText}}' />
+            <input aria-label="enter search criteria to filter by sub area of law" id="matSubAreaofLaw1" role="textbox" tabindex="0" class='form-control' my-Enter='vm.mattersearch(""+vm.configSearchContent.ManagedPropertySubAreaOfLaw+":" + vm.subAreaOfLawSearchTerm + "*("+vm.configSearchContent.ManagedPropertyMatterName+":* OR "+vm.configSearchContent.ManagedPropertyMatterId+":* OR "+vm.configSearchContent.ManagedPropertyClientName+":*)",vm.searchexp,false)' uib-typeahead="searchMatters.matterSubAreaOfLaw for searchMatters in vm.filterSearch($viewValue)" ng-if="vm.filtername==vm.matterConfigContent.GridColumn4Header && vm.globalSettings.isBackwardCompatible" ng-model='vm.subAreaOfLawSearchTerm' placeholder='{{vm.matterConfigContent.FilterSearchPlaceholderText}}' />
+            <input aria-label="enter search criteria to filter by matter id" id="matMatterId" role="textbox" tabindex="0" class='form-control' my-Enter='vm.mattersearch(""+vm.configSearchContent.ManagedPropertyMatterId+":" + vm.projectIDSearchTerm + "*("+vm.configSearchContent.ManagedPropertyMatterName+":* OR "+vm.configSearchContent.ManagedPropertyMatterId+":* OR "+vm.configSearchContent.ManagedPropertyClientName+":*)",vm.searchexp,false)' uib-typeahead="searchMatters.matterSubAreaOfLaw for searchMatters in vm.filterSearch($viewValue)" ng-if="vm.filtername==vm.matterConfigContent.GridColumn6Header && vm.globalSettings.isBackwardCompatible" ng-model='vm.projectIDSearchTerm' placeholder='{{vm.matterConfigContent.FilterSearchPlaceholderText}}' />
+            <div class='input-group-btn'>
+                <button type='button' id="btnMatterFilter"
+                        aria-label="filter by matter name"
+                        
+                        ng-if="vm.filtername==vm.matterConfigContent.GridColumn1Header"
+                        ng-click='vm.mattersearch(""+vm.configSearchContent.ManagedPropertyMatterName+":"+vm.searchTerm+"*("+vm.configSearchContent.ManagedPropertyMatterName+":* OR "+vm.configSearchContent.ManagedPropertyMatterId+":* OR "+vm.configSearchContent.ManagedPropertyClientName+":*)",vm.searchexp,false)'
+                        class='btn btn-default'>
+                    <img src='../images/search-15x15-666.png' />
+                </button>
+                <button aria-label="filter by clients" type='button'  ng-if="vm.filtername==vm.matterConfigContent.GridColumn3Header && !vm.globalSettings.isBackwardCompatible" ng-click='vm.mattersearch(""+vm.configSearchContent.ManagedPropertyClientName+":" + vm.clientSearchTerm + "*("+vm.configSearchContent.ManagedPropertyMatterName+":* OR "+vm.configSearchContent.ManagedPropertyMatterId+":* OR "+vm.configSearchContent.ManagedPropertyClientName+":*)",vm.searchexp,false)' class='btn btn-default'><img src='../images/search-15x15-666.png' /></button>
+                <button aria-label="filter by practice groups" type='button' ng-if="vm.filtername==vm.matterConfigContent.GridColumn2Header && vm.globalSettings.isBackwardCompatible" ng-click='vm.mattersearch(""+vm.configSearchContent.ManagedPropertyPracticeGroup+":" + vm.practiceGroupSearchTerm + "*("+vm.configSearchContent.ManagedPropertyMatterName+":* OR "+vm.configSearchContent.ManagedPropertyMatterId+":* OR "+vm.configSearchContent.ManagedPropertyClientName+":*)",vm.searchexp,false)' class='btn btn-default'><img src='../images/search-15x15-666.png' /></button>
+                <button aria-label="filter by responsible attorney" type='button'  ng-if="vm.filtername==vm.matterConfigContent.GridColumn5Header && !vm.globalSettings.isBackwardCompatible" ng-click='vm.mattersearch(""+vm.configSearchContent.ManagedPropertyResponsibleAttorney+":" + vm.attorneySearchTerm + "*("+vm.configSearchContent.ManagedPropertyMatterName+":* OR "+vm.configSearchContent.ManagedPropertyMatterId+":* OR "+vm.configSearchContent.ManagedPropertyClientName+":*)",vm.searchexp,false)' class='btn btn-default'><img src='../images/search-15x15-666.png' /></button>
+                <button aria-label="filter by sub area of law" type='button' ng-if="vm.filtername==vm.matterConfigContent.GridColumn6Header && !vm.globalSettings.isBackwardCompatible" ng-click='vm.mattersearch(""+vm.configSearchContent.ManagedPropertySubAreaOfLaw+":" + vm.areaSearchTerm + "*("+vm.configSearchContent.ManagedPropertyMatterName+":* OR "+vm.configSearchContent.ManagedPropertyMatterId+":* OR "+vm.configSearchContent.ManagedPropertyClientName+":*)",vm.searchexp,false)' class='btn btn-default'><img src='../images/search-15x15-666.png' /></button>
+                <button aria-label="filter by area of law" type='button' ng-if="vm.filtername==vm.matterConfigContent.GridColumn3Header && vm.globalSettings.isBackwardCompatible" ng-click='vm.mattersearch(""+vm.configSearchContent.ManagedPropertyAreaOfLaw+":" + vm.areaOfLawSearchTerm + "*("+vm.configSearchContent.ManagedPropertyMatterName+":* OR "+vm.configSearchContent.ManagedPropertyMatterId+":* OR "+vm.configSearchContent.ManagedPropertyClientName+":*)",vm.searchexp,false)' class='btn btn-default'><img src='../images/search-15x15-666.png' /></button>
+                <button aria-label="filter by sub area of law" type='button'  ng-if="vm.filtername==vm.matterConfigContent.GridColumn4Header && vm.globalSettings.isBackwardCompatible" ng-click='vm.mattersearch(""+vm.configSearchContent.ManagedPropertySubAreaOfLaw+":" + vm.subAreaOfLawSearchTerm + "*("+vm.configSearchContent.ManagedPropertyMatterName+":* OR "+vm.configSearchContent.ManagedPropertyMatterId+":* OR "+vm.configSearchContent.ManagedPropertyClientName+":*)",vm.searchexp,false)' class='btn btn-default'><img src='../images/search-15x15-666.png' /></button>
+                <button aria-label="filter by matter id" type='button'  ng-if="vm.filtername==vm.matterConfigContent.GridColumn6Header && vm.globalSettings.isBackwardCompatible" ng-click='vm.mattersearch(""+vm.configSearchContent.ManagedPropertyMatterId+":" + vm.projectIDSearchTerm + "*("+vm.configSearchContent.ManagedPropertyMatterName+":* OR "+vm.configSearchContent.ManagedPropertyMatterId+":* OR "+vm.configSearchContent.ManagedPropertyClientName+":*)",vm.searchexp,false)' class='btn btn-default'><img src='../images/search-15x15-666.png' /></button>
+            </div>
+        </div>
+        <hr />
+        <div class='clearFilterText'>
+            <div ng-click='vm.clearFilters(vm.filtername)' class='clearFiltersIcon'>
+                <img src='../Images/Filters_30px_X_30px_active_color_666.png'
+                     aria-label="clear filter text" tabindex="0"
+                     alt='{{vm.matterConfigContent.ImageClearTitle}}' title='{{vm.matterConfigContent.ImageClearAltText}}'>
+            </div>
+            <div class='ms-font-m ms-font-weight-semilight clearText' title='{{vm.matterConfigContent.ClearFilterText}} {{vm.filtername}}' ng-click='vm.clearFilters(vm.filtername)'><span>{{vm.matterConfigContent.ClearFilterText}} </span><span class='clearFilterTitle'>{{vm.filtername}}</span></div>
+            <div style="width:100%;">
+                <div ng-hide="vm.lazyloaderFilter">
+                    <img src="../Images/WindowsLoadingFast.GIF"
+                         aria-label="loading data"
+                         style="margin-left: 55px; margin-top:3px;"
+                         alt="{{vm.matterConfigContent.AttachmentLoadingTitle}}"
+                         title="{{vm.matterConfigContent.AttachmentLoadingTitle}}" />
+                </div>
+            </div>
+            <div id='filterResultsContainer'>
+                <div class='filterValueLabels ms-font-m ms-font-weight-semilight'
+                     aria-label="use tab to move to next item"
+                     tabindex="0"
+                     ng-if="vm.filtername==vm.matterConfigContent.GridColumn1Header"
+                     ng-repeat='matter in vm.details'
+                     ng-click='vm.mattersearch(matter.matterName,""+vm.configSearchContent.ManagedPropertyMatterName+"",true)'
+                     title="{{matter.matterName}}">
+                    <span tabindex="0">{{matter.matterName}}</span>
+                </div>
+                <div class='filterValueLabels ms-font-m ms-font-weight-semilight'
+                     aria-label="use tab to move to next item"
+                     tabindex="0"
+                     ng-if="vm.filtername==vm.matterConfigContent.GridColumn3Header && !vm.globalSettings.isBackwardCompatible"
+                     ng-repeat='client in vm.details' ng-click='vm.mattersearch(client.matterClient,""+vm.configSearchContent.ManagedPropertyClientName+"",true)'
+                     title={{client.matterClient}}>
+                    <span tabindex="0">{{client.matterClient}}</span>
+                </div>
+                <div class='filterValueLabels ms-font-m ms-font-weight-semilight'
+                     aria-label="use tab to move to next item"
+                     tabindex="0"
+                     ng-if="vm.filtername==vm.matterConfigContent.GridColumn2Header && vm.globalSettings.isBackwardCompatible"
+                     ng-repeat='matter in vm.details' ng-click='vm.mattersearch(vm.filtermatter(matter.matterPracticeGroup),""+vm.configSearchContent.ManagedPropertyPracticeGroup+"",true)'
+                     title={{matter.matterPracticeGroup}}>
+                    <span tabindex="0">{{matter.matterPracticeGroup}}</span>
+                </div>
+                <div class='filterValueLabels ms-font-m ms-font-weight-semilight'
+                     aria-label="use tab to move to next item"
+                     tabindex="0"
+                     ng-if="vm.filtername==vm.matterConfigContent.GridColumn5Header && !vm.globalSettings.isBackwardCompatible"
+                     ng-repeat='matter in vm.details' ng-click='vm.mattersearch(vm.filtermatter(matter.matterResponsibleAttorney),""+vm.configSearchContent.ManagedPropertyResponsibleAttorney+"",true)'
+                     title={{vm.filtermatter(matter.matterResponsibleAttorney)}}>
+                    <span tabindex="0">{{vm.filtermatter(matter.matterResponsibleAttorney)}}</span>
+                </div>
+                <div class='filterValueLabels ms-font-m ms-font-weight-semilight'
+                     aria-label="use tab to move to next item"
+                     tabindex="0"
+                     ng-if="vm.filtername==vm.matterConfigContent.GridColumn6Header && !vm.globalSettings.isBackwardCompatible"
+                     ng-repeat='matter in vm.details' ng-click='vm.mattersearch(vm.filtermatter(matter.matterSubAreaOfLaw),""+vm.configSearchContent.ManagedPropertySubAreaOfLaw+"",true)'
+                     title={{vm.filtermatter(matter.matterSubAreaOfLaw)}}>
+                    <span tabindex="0">{{vm.filtermatter(matter.matterSubAreaOfLaw)}}</span>
+                </div>
+                <div class='filterValueLabels ms-font-m ms-font-weight-semilight'
+                     aria-label="use tab to move to next item"
+                     tabindex="0"
+                     ng-if="vm.filtername==vm.matterConfigContent.GridColumn3Header && vm.globalSettings.isBackwardCompatible"
+                     ng-repeat='matter in vm.details' ng-click='vm.mattersearch(vm.filtermatter(matter.matterAreaOfLaw),""+vm.configSearchContent.ManagedPropertyAreaOfLaw+"",true)'
+                     title={{vm.filtermatter(matter.matterAreaOfLaw)}}>
+                    <span tabindex="0">{{vm.filtermatter(matter.matterAreaOfLaw)}}</span>
+                </div>
+                <div class='filterValueLabels ms-font-m ms-font-weight-semilight'
+                     aria-label="use tab to move to next item"
+                     tabindex="0"
+                     ng-if="vm.filtername==vm.matterConfigContent.GridColumn4Header && vm.globalSettings.isBackwardCompatible"
+                     ng-repeat='matter in vm.details' ng-click='vm.mattersearch(vm.filtermatter(matter.matterSubAreaOfLaw),""+vm.configSearchContent.ManagedPropertySubAreaOfLaw+"",true)'
+                     title={{vm.filtermatter(matter.matterSubAreaOfLaw)}}>
+                    <span tabindex="0">{{vm.filtermatter(matter.matterSubAreaOfLaw)}}</span>
+                </div>
+                <div class='filterValueLabels ms-font-m ms-font-weight-semilight'
+                     aria-label="use tab to move to next item"
+                     tabindex="0"
+                     ng-if="vm.filtername==vm.matterConfigContent.GridColumn6Header && vm.globalSettings.isBackwardCompatible"
+                     ng-repeat='matter in vm.details' ng-click='vm.mattersearch(vm.filtermatter(matter.matterID),""+vm.configSearchContent.ManagedPropertyMatterId+"",true)'
+                     title={{vm.filtermatter(matter.matterID)}}>
+                    <span tabindex="0">{{vm.filtermatter(matter.matterID)}}</span>
+                </div>
+                <div title="{{vm.matterConfigContent.NoFilterMatchMsgTitle}}"
+                     aria-label="use tab to move to next item"
+                     tabindex="0"
+                     ng-if="vm.filternodata" class="ms-font-m filterFlyOutNoResults">
+                    <span>{{vm.matterConfigContent.NoFilterMatchMsgText}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="matterheaderdates flyoutWrapper" style="position: absolute;top: 128px;background: #fff;z-index: 5;left: 10px;border: 1px solid #ccc;background-color: white;" ng-click='$event.stopPropagation();' ng-keydown="$event.keyCode==27?vm.matterdateheader=true:null" ng-hide="vm.matterdateheader">
+        <div ng-show="vm.filtername=='Open Date' || vm.filtername=='Created Date'">
+            <div class='input-group'>
+                <input type='text' id="matOpenCreatedDate"
+                       placeholder='{{vm.matterConfigContent.StartDatePlaceHolder}}'
+                       class='calendar form-control'
+                       uib-datepicker-popup='MM/dd/yyyy'
+                       ng-model='vm.startDate' tabindex="0"
+                       ng-keydown="vm.changeOnCreateDate($event)"
+                       ng-blur="vm.changeOnCreateDate($event)"
+                       is-open='vm.openedStartDate'
+                       datepicker-options='vm.dateOptions'
+                       ng-required='true' close-text='Close'
+                       aria-live="assertive"
+                       aria-atomic="true"
+                       today-text="Today"
+                       clear-text="Clear"
+                       aria-label="select start date"
+                       alt-input-formats='altInputFormats' />
+                <span class='input-group-btn'>
+                    <button type='button' class='btn btn-default' tabindex="0"
+                            aria-label="open calendar control"
+                            ng-click='vm.openStartDate($event)'>
+                        <i class='glyphicon glyphicon-calendar'></i>
+                    </button>
+                </span>
+            </div>
+            <div class='input-group' style='margin-top:5px' role="region">
+                <input type='text' placeholder='{{vm.matterConfigContent.EndDatePlaceHolder}}' class='calendar form-control'
+                       uib-datepicker-popup='MM/dd/yyyy'
+                       ng-model='vm.endDate' tabindex="0"
+                       is-open='vm.openedEndDate'
+                       ng-keydown="vm.changeOnCreateDate($event)"
+                       ng-blur="vm.changeOnCreateDate($event)"
+                       datepicker-options='vm.endDateOptions'
+                       ng-required='true' close-text='Close'
+                       alt-input-formats='altInputFormats'
+                       aria-live="assertive"
+                       today-text="Today"
+                       clear-text="Clear"
+                       aria-atomic="true"
+                       aria-label="select end date" />
+                <span class='input-group-btn'>
+                    <button type='button' class='btn btn-default'
+                            tabindex="0"
+                            aria-label="open calendar control"
+                            ng-click='vm.openEndDate($event)'>
+                        <i class='glyphicon glyphicon-calendar'></i>
+                    </button>
+                </span>
+            </div>
+        </div>
+        <div ng-show="vm.filtername=='Modified Date'">
+            <div class='input-group'>
+                <input type='text' id="matModifiDate"
+                       placeholder='{{vm.matterConfigContent.StartDatePlaceHolder}}'
+                       class='calendar form-control'
+                       uib-datepicker-popup='MM/dd/yyyy'
+                       ng-model='vm.modStartDate'
+                       is-open='vm.modifiedStartDate'
+                       ng-keydown="vm.changeOnModifiedDate($event)"
+                       ng-blur="vm.changeOnModifiedDate($event)"
+                       datepicker-options='vm.modDateOptions'
+                       ng-required='true' close-text='Close'
+                       aria-live="assertive"
+                       today-text="Today"
+                       clear-text="Clear"
+                       aria-atomic="true"
+                       aria-label="select end date"
+                       alt-input-formats='altInputFormats' />
+                <span class='input-group-btn'>
+                    <button type='button' class='btn btn-default'
+                            tabindex="0"
+                            aria-label="open calendar control"
+                            ng-click='vm.openModStartDate($event)'>
+                        <i class='glyphicon glyphicon-calendar'></i>
+                    </button>
+                </span>
+            </div>
+            <div class='input-group' style='margin-top:5px'>
+                <input type='text' placeholder='{{vm.matterConfigContent.EndDatePlaceHolder}}' class='calendar form-control'
+                       uib-datepicker-popup='MM/dd/yyyy'
+                       ng-model='vm.modEndDate'
+                       is-open='vm.modifiedEndDate'
+                       ng-keydown="vm.changeOnModifiedDate($event)"
+                       ng-blur="vm.changeOnModifiedDate($event)"
+                       datepicker-options='vm.modEndDateOptions'
+                       ng-required='true' close-text='Close'
+                       alt-input-formats='altInputFormats'
+                       aria-live="assertive"
+                       today-text="Today"
+                       clear-text="Clear"
+                       aria-atomic="true"
+                       aria-label="select end date" />
+                <span class='input-group-btn'>
+                    <button type='button'
+                            tabindex="0"
+                            aria-label="open calendar control"
+                            class='btn btn-default' ng-click='vm.openModEndDate($event)'>
+                        <i class='glyphicon glyphicon-calendar'></i>
+                    </button>
+                </span>
+            </div>
+        </div>
+        <div class='okDateButton'
+             tabindex="0"
+             aria-live="assertive"
+             aria-atomic="true"
+             aria-label="press ok button to filter matters by date criteria"
+             id='btnOK'
+             ng-click='vm.FilterModifiedDate(vm.filtername);vm.matterdateheader=true;'>{{vm.matterConfigContent.Button5OkText}}</div>
+        <hr />
+        <div class='clearFilterText' data-clearfiltertype='text'>
+            <div ng-click='vm.clearFilters(vm.filtername)' class='clearFiltersIcon'>
+                <img src='../Images/Filters_30px_X_30px_active_color_666.png'
+                     tabindex="0"
+                     alt='clear'
+                     title='{{vm.matterConfigContent.ImageClearAltText}}'>
+            </div>
+            <div class='ms-font-m ms-font-weight-semilight clearText'
+                 title='Clear filters from {{vm.filtername}}'
+                 ng-click='vm.clearFilters(vm.filtername)'>
+                <span>{{vm.matterConfigContent.ClearFilterText}} </span>
+                <span class='clearFilterTitle'>{{vm.filtername}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div ng-init="vm.pageLoadCompleted()"></div>
+
+
+    <div class="modal fade" id="UploadExtraMatterPropertiesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="height:500px;">
+        <div class="modal-dialog modal-lg" style="width:100%;margin:0px;font-size: 0.87em;">
+            <div class="modal-content" style="height: 314px;">
+                <div class="row modalClose">
+                    <img data-dismiss="modal" ng-click="vm.hideBreadCrumb()" class="pull-right" src="../../images/close-666.png" />
+                </div>
+                <div class="modal-body modelbodyContainer" style="overflow:auto; height:300px;">
+
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="row" matteradditionalfieldsdirective colorder=1 ng-repeat="input in vm.matterExtraFields"></div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="row" matteradditionalfieldsdirective colorder=2 ng-repeat="input in vm.matterExtraFields"></div>
+                        </div>
+                    </div>
+
+                    <button ng-if="vm.matterExtraFields.length>0" class="buttonPrev pull-left marginTop10" ng-click='vm.SaveDocPropertiesAndUpload(vm.FilesFromDesktopOrMail)'>Submit</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+    <!--Styles-->
+    <link rel="stylesheet" type="text/css" href="lib/angular-ui-grid/ui-grid.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/site.css" />
+
+    <link href="css/viewspecific/jsongridwebdashboard.css" rel="stylesheet" />
+    <link href="css/viewspecific/listview.css" rel="stylesheet" />
+    <link href="css/viewspecific/mailcartpopup.css" rel="stylesheet" />
+    <link href="css/viewspecific/managepermissions.css" rel="stylesheet" />
+    <link href="css/viewspecific/searchdocument.css" rel="stylesheet" />
+    <link href="css/viewspecific/searchmatter.css" rel="stylesheet" />
+    <link href="css/viewspecific/settings.css" rel="stylesheet" />
+    <link href="css/viewspecific/uploaddocument.css" rel="stylesheet" />
+    <link href="css/viewspecific/webdashboard.css" rel="stylesheet" />
+    <link href="css/viewspecific/briefcaseoperations.css" rel="stylesheet" />
+    <link href="css/viewspecific/filterpanel.css" rel="stylesheet" />
+    <link href="css/viewspecific/gridview.css" rel="stylesheet" />
+    <link href="css/viewspecific/home.css" rel="stylesheet" />
+    <link href="css/viewspecific/jquery-ui-1.10.3.custom.css" rel="stylesheet" />
+
+    <link href="fabric-0.6.0/css/fabric-0.6.0.components.min.css" rel="stylesheet" />
+    <link href="fabric-0.6.0/css/fabric-0.6.0.min.css" rel="stylesheet" />
+
+    <link href="css/viewspecific/popupstyles.css" rel="stylesheet" />
+    <link href="css/viewspecific/matterprovision.css" rel="stylesheet" />
+    <link href="css/viewspecific/commoncontrols.css" rel="stylesheet" />
+    <link href="css/viewspecific/creatematter.css" rel="stylesheet" />
+
+
+    <!--Scripts--> 
+    <script src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.1/jquery.validate.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.6/jquery.validate.unobtrusive.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--<script src="lib/angular/angular.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
+    <!--<script src="lib/angular-route/angular-route.js"></script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.2/angular-ui-router.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-touch.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
+    <!--<script src="lib/bootstrap/dist/js/bootstrap-tooltip.js"></script>
+    <script src="lib/bootstrap/dist/js/bootstrap-popover.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.5.8/angular-resource.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.5.8/angular-sanitize.js"></script>
+    <script src="lib/adal-angular/dist/adal.min.js"></script>
+    <script src="lib/adal-angular/dist/adal-angular.min.js"></script>
+    <script src="lib/angular-ui-grid/ui-grid.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.2.0/ui-bootstrap-tpls.js"></script>
+    <script src="js/site.js" asp-append-version="true"></script>
+    <script src="js/jquery.accessibility.js" asp-append-version="true"></script>
+    <script src="js/jquery.table2excel.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angulartics/1.3.0/angulartics.min.js"></script>
+    <script src="js/angulartics-azure.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-aria.js"></script>
+</head>
+<body ng-app="matterMain" menuclose class="{{$root.bodyclass}} overflowxAuto" id="matterMain">
+    <!--SPA View-->
+    <div ui-view="mainView" style=""></div>
+
+    <script src="app/app.js"></script>
+    <script src="app/config.js"></script>
+    <script src="app/uiconfig.js"></script>
+    <script src="app/directives/heading.directive.js"></script>
+    <script src="app/directives/common.directive.js"></script>
+    <script src="app/home.controller.js"></script>
+    <script src="app/navigation.resources.js"></script>
+    <script src="app/navigation.controller.js"></script>
+    <script src="app/services/auth.service.js"></script>
+    <script src="app/services/api.service.js"></script>
+    <script src="app/matter/matter.resources.js"></script>
+    <script src="app/matter/matters.controller.js"></script>
+    <script src="app/matter/createMatter.controller.js"></script>
+    <script src="app/matter/matterusers.controller.js"></script>
+    <script src="app/dashboard/documentdashboard.resources.js"></script>
+    <script src="app/dashboard/documentdashboard.controller.js"></script>
+    <script src="app/dashboard/matterdashboard.resources.js"></script>
+    <script src="app/dashboard/matterdashboard.controller.js"></script>
+    <script src="app/dashboard/settings.resources.js"></script>
+    <script src="app/dashboard/settings.controller.js"></script>
+    <script src="app/matter/upload.js"></script>
+    <script src="app/document/documents.controller.js"></script>
+    <script src="app/document/document.resources.js"></script>
+    <script src="app/directives/drag.directive.js"></script>
+    <script src="app/directives/dragmultiple.directive.js"></script>
+    <script src="app/directives/dropmultiple.directive.js"></script>
+    <script src="app/directives/drop.directive.js"></script>
+    <script src="app/admin/admin.resources.js"></script>
+    <script src="app/admin/admin.controller.js"></script>
+    <script src="app/bulkupload/bulkupload.resources.js"></script>
+    <script src="app/bulkupload/bulkupload.controller.js"></script>
+    <script src="app/home.resources.js"></script>
+    <script src="app/uiconfig.js"></script>
+    <!--
+    To collect end-user usage analytics about your application,
+    insert the following script into each page you want to track.
+    Place this code immediately before the closing </head> tag,
+    and before any other scripts. Your first data will appear
+    automatically in just a few seconds.
+    -->
+    <script type="text/javascript">
+      
+        var appInsights = window.appInsights || function (config) {
+            function r(config) { t[config] = function () { var i = arguments; t.queue.push(function () { t[config].apply(t, i) }) } } var t = { config: config }, u = document, e = window, o = "script", s = u.createElement(o), i, f; s.src = config.url || "//az416426.vo.msecnd.net/scripts/a/ai.0.js"; u.getElementsByTagName(o)[0].parentNode.appendChild(s); try { t.cookie = u.cookie } catch (h) { } for (t.queue = [], i = ["Event", "Exception", "Metric", "PageView", "Trace", "Dependency"]; i.length;) r("track" + i.pop()); return r("setAuthenticatedUserContext"), r("clearAuthenticatedUserContext"), config.disableExceptionTracking || (i = "onerror", r("_" + i), f = e[i], e[i] = function (config, r, u, e, o) { var s = f && f(config, r, u, e, o); return s !== !0 && t["_" + i](config, r, u, e, o), s }), t
+        }({
+            instrumentationKey: configs.appInsights.instrumentationKey
+        });
+        window.appInsights = appInsights;
+        configs.appInsights.appType = GetAppType();
+
+        function GetAppType()
+        {
+            var appType = "Browser";
+            try
+            {
+                if (typeof Office.context.mailbox != 'undefined')
+                {
+                    appType = 'Outlook';
+                }
+            }
+            catch(error)
+            {
+                try
+                {
+                    if (typeof Office.context.document != 'undefined')
+                    {
+                        appType = 'Word';
+                    }
+                }
+                catch(error)
+                {
+                    
+                }
+            }
+            return appType;
+        }
+    </script>
+</body>
+</html>
+

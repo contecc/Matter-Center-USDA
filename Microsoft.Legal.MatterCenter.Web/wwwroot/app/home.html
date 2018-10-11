@@ -1,0 +1,307 @@
+﻿<!--<header id="app-header">
+    <heading employee-names="vm.userName" nav-url="vm.navUrl" nav-url-text="vm.navUrlText"></heading>
+</header>
+-->
+<!--<a class="skip-main" href="#">Skip to main content</a>-->
+<div ng-class="{'dashboardXOverFlow':$root.displayOverflow!=''}">
+     
+    <div class="row {{$root.profileClass}} topheader">
+        
+        <div tabindex="-1" class="col-xs-10 AppHeader">           
+                     
+            <div tabindex="-1" class="AppSwitcherContainer" ng-click="vm.menuClick()" 
+                 ng-keydown="$event.keyCode==27?vm.menuClick():null">
+                <img tabindex="0" role="button"
+                     ng-keydown="$event.keyCode==27?vm.menuClick():null"
+                     class="AppSwitcher OpenSwitcher" src="Images/hamburger30x30.png"
+                     title="{{vm.header.MenuImage1Title}}" />
+                <img tabindex="0" role="button"
+                     ng-keydown="$event.keyCode==27?vm.menuClick():null" class="AppSwitcher CloseSwitcher hide"
+                     src="Images/MC_Navigation_Close.png" title="{{vm.header.CloseTitle}}" />
+                <div class="MenuCaption"><span>{{vm.header.MenuImage1Caption}}</span></div>
+            </div>
+            <div role="menu" class="homeAppMenuFlyout ms-shadow" ng-show="$root.appMenuFlyOut"
+                 ng-class="{'height222':vm.canLoginUserCreateMatter,'height200':!vm.canLoginUserCreateMatter}"
+                 aria-label="{{$root.menuShowHideText}}">
+                <div tabindex="0" class="AppMenuFlyoutPriLinks" >
+                    <ul class='dropdown-menu-home' role="menu">
+                        <li class='ms-ContextualMenu-item' role="menuitem" ng-click="vm.navigate('mc.navigation')"
+                            aria-label="{{vm.header.Menu1Option1Title}} use tab to move to next item"
+                            ng-keydown="$event.keyCode==13?vm.navigate('mc.navigation'):null"  tabindex="0" >
+                            <a tabindex="-1" aria-hidden="true" 
+                               aria-label="{{vm.header.Menu1Option1Title}} use tab to move to next item" role="menuitem"
+                               ui-sref='mc.navigation()' class="AppFlyoutLinks HomeLink" title="{{vm.header.Menu1Option1Title}}">
+                                <span class="AppFlyoutLinksText">{{vm.header.Menu1Option1Text}}</span>
+                            </a>
+                        </li>
+                        <li class='ms-ContextualMenu-item'  role="menuitem"   tabindex="0"
+                            aria-label="{{vm.header.Menu1Option2Title}} use tab to move to next item or shift + tab to move to previous item"
+                            ng-click="vm.navigate('mc.matters')" ng-keydown="$event.keyCode==13?vm.navigate('mc.matters'):null">
+                            <a tabindex="-1" aria-hidden="true" 
+                               aria-label="{{vm.header.Menu1Option2Title}} use tab to move to next item or shift + tab to move to previous item" 
+                               ui-sref='mc.matters()'
+                               class="AppFlyoutLinks MatterSitesLink" title="{{vm.header.Menu1Option2Title}}">
+                                <span class="AppFlyoutLinksText">{{vm.header.Menu1Option2Text}}</span>
+                            </a>
+                        </li>
+                        <li class='ms-ContextualMenu-item'  role="menuitem"   tabindex="0"
+                            aria-label="{{vm.header.Menu1Option3Title}} use tab to move to next item or shift + tab to move to previous item"
+                            ng-click="vm.navigate('mc.documents')" ng-keydown="$event.keyCode==13?vm.navigate('mc.documents'):null">
+                            <a tabindex="-1"  aria-hidden="true" 
+                               aria-label="{{vm.header.Menu1Option3Title}} use tab to move to next item or shift + tab to move to previous item" 
+                               ui-sref='mc.documents()'
+                               class="AppFlyoutLinks MatterDocumentsLink" title="{{vm.header.Menu1Option3Title}}">
+                                <span class="AppFlyoutLinksText">{{vm.header.Menu1Option3Text}}</span>
+                            </a>
+                        </li>
+                        <li class='ms-ContextualMenu-item'  role="menuitem"  tabindex="0"
+                            aria-label="{{vm.header.Menu1Option4Title}} use shift + tab to move to previous item"
+                            ng-click="vm.navigate('mc.createMatter')" ng-keydown="$event.keyCode==13?vm.navigate('mc.createMatter'):null">
+                            <a tabindex="-1" aria-hidden="true" 
+                               aria-label="{{vm.header.Menu1Option4Title}} use shift + tab to move to previous item"
+                               ng-keydown="$event.keyCode==9?vm.menuClick():null" ui-sref='mc.createMatter()'
+                               class="AppFlyoutLinks MatterDocumentsLink" ng-if="vm.canLoginUserCreateMatter"
+                               title="{{vm.header.Menu1Option4Title}}">
+                                <span class="AppFlyoutLinksText">{{vm.header.Menu1Option4Text}}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="HeaderPlaceHolder" class="padlf40">
+                <span tabindex="-1" class="AppLogoContainer">
+                    <img tabindex="-1" ng-show="!vm.globalSettings.isBackwardCompatible" class="AppLogo" aria-label="{{vm.header.LogoImageTitle}}" src="Images/MC_Logo.png">
+                    <span ng-if="vm.globalSettings.isBackwardCompatible" class="ApplogoFirstPart">CELA </span>
+                    <span ng-if="vm.globalSettings.isBackwardCompatible" class="ApplogoSecondPart">Project Center</span>
+                </span>
+            </div>
+        </div>
+        
+        <div class="col-xs-2 col-sm-2 pad0 width25">
+            <div class="pull-right">
+                <div  style="display:inline-block">
+                    <div tabindex="0" id="ProfileSwitcher"
+                         ng-keydown="$event.keyCode==27?$root.dispPersonal($event):null"
+                         ng-click="$root.dispPersonal($event)">
+                        <img tabindex="-1" class="AppHeaderProfilePict" ng-src="{{vm.smallPictureUrl}}" id="AppHeaderPersona" alt="{{vm.header.ProfilePictureLabelText}}" />
+                    </div>
+                    <div tabindex="0" class="PersonalInfoFlyout" ng-show="$root.displayinfo" ng-click="$event.stopPropagation();" role="region">
+                        <div class="PersonaContainer">
+                            <div class="PersonaPictureContainer">
+                                <img id="PersonaPicture" ng-src="{{vm.largePictureUrl}}" alt="{{vm.header.ProfilePictureLabelText}}" title="{{vm.header.ProfilePictureLabelText}}" />
+                            </div>
+                            <div class="PersonaPictureDetails" aria-live="assertive" aria-atomic="true" tabindex="0">
+                                <div class="PersonaTitle" id="PersonaTitle" title={{vm.fullName}} aria-label="{{vm.fullName}}">{{vm.fullName}}</div>
+                                <div class="PersonaEmail" id="PersonaEmail" title={{vm.loginUserEmail}} aria-label="{{vm.fullName}}">{{vm.loginUserEmail}}</div>
+                            </div>
+                        </div>
+                        <div class="SignOutLink" aria-live="assertive" aria-atomic="true">
+
+                            <button class="btn btn-link" ng-show="vm.isAuthenticated" ng-click="vm.signOut()">{{vm.header.LabelSingOutText}}</button>
+                        </div>
+                    </div>
+                </div>
+                <div  style="display:inline-block">
+                    <div id="ContextualHelp">
+                        <img class="ContextualHelpLogo" src="Images/MC_Help_Icon.png" alt="{{vm.header.ContextualHelpAltText}}" title="{{vm.header.ContextualHelpImageTitle}}"
+                             ng-keydown="$event.keyCode==27?$root.dispContextualHelp($event):null" ng-click="$root.dispContextualHelp($event)" />
+                        <div data-class="ms-u-slideLeftIn40" class="ContextualHelp ms-u-slideLeftIn40" ng-show="$root.contextualhelp" ng-click="$event.stopPropagation();">
+                            <div class="ContextualHelpFlyout" role="menu">
+                                <img class="homeCloseContextualHelpFlyout" title="{{vm.header.CloseTitle}}" alt="{{vm.header.ContextualHelpFlyoutAltText}}"
+                                     ng-click="$root.dispContextualHelp($event)" src="Images/contextual_help_close_icon.png" aria-live="assertive" aria-atomic="true" tabindex="0" />
+                                <div class="ContextualHelpHeader" title="{{vm.header.ContextualHelpHeader}}">{{vm.header.ContextualHelpHeader}}</div>
+                                <div class="contextualHelpSections">
+                                    <div class="ContextualHelpSubSection" id="popularSearchesSection" ng-repeat="helpData in vm.helpData">
+                                        <div role="menuitem" class="ContextualHelpSectionHeader" aria-live="assertive" aria-atomic="true" tabindex="0"
+                                             aria-label="{{helpData.contextSection.sectionTitle}}"
+                                             title="{{helpData.contextSection.sectionTitle}}" id="{{helpData.contextSection.sectionTitle}}">{{helpData.contextSection.sectionTitle}}</div>
+                                        <div class="ContextualHelpSectionData displaySingleColumn" title="{{helpData.linkTitle}}" tabindex="0">
+                                            <a href="{{helpData.linkURL}}" aria-label="{{helpData.linkTitle}}"
+                                               target="_blank" aria-live="assertive" aria-atomic="true" tabindex="0" role="menuitem">{{helpData.linkTitle}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ContextualHelpSupport" role="region">
+                                    <span class="ContextualHelpBottomText">
+                                        {{vm.header.ContextualHelpFooterLabel}}
+                                        <span class="ContextualHelpSupportMailTo">
+                                            <a class="emailLink"
+                                               aria-label="{{vm.navigation.ContextualHelpFooterLink1Label}}"
+                                               title="{{vm.navigation.ContextualHelpFooterLink1Label}}"
+                                               href="{{vm.navigation.MatterCenterSupportLink}}">
+                                                {{vm.navigation.ContextualHelpFooterLink1Label}}
+                                            </a>
+                                        </span>
+                                    </span>
+                                </div>
+                                <div class="lazyLoading" style="left:45%;bottom:162px" ng-hide="vm.lazyloaderhelp">
+                                    <img src="../Images/WindowsLoadingFast.GIF"
+                                         alt="{{vm.matterConfigContent.AttachmentLoadingTitle}}"
+                                         title="{{vm.matterConfigContent.AttachmentLoadingTitle}}" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="maincontentDiv commonContent marginTop20" id="matterCenterHeader">
+        <div class="row pad0 mainHeader">
+            <div class="col-xs-5 col-sm-5 col-lg-6 pad0">
+                <div class="row pad0 margin0">
+                    <div class="col-xs-12 col-sm-10 col-lg-11 pad0">
+                        <div class="floatLeft" id="hamburgerConatiner"
+                             ng-click="vm.showCloseIcon()"
+                             ng-keydown="$event.keyCode==13?vm.showCloseIcon():null"
+                             aria-label="{{vm.header.ImageOpenHamburgerTitle}}"
+                             role="button"
+                             ng-show="vm.showHamburger">
+                            <img class="headerActions pull-left" tabindex="0"
+                                 title="{{vm.header.ImageOpenHamburgerTitle}}"
+                                 data-hamburger="0" id="openHamburger" alt="" src="Images/MC_homepage_Hamburger.png" />
+                        </div>
+                        <div class="closeIcon"
+                             id="dbExpandedMenu"
+                             ng-if="vm.showClose"
+                             role="button"
+                             aria-label="{{vm.header.ImageCloseHamburgerTitle}}"
+                             ng-keydown="$event.keyCode==27||$event.keyCode==13?vm.showHamburgerIcon():null"
+                             ng-click="vm.showHamburgerIcon()">
+                            <img class="headerActions pull-left"
+                                 title="{{vm.header.ImageCloseHamburgerTitle}}"
+                                 data-hamburger="1" id="closeHamburger"
+                                 ng-keypress="$event.keyCode==27?vm.showHamburgerIcon():null"
+                                 alt="" src="Images/MC_Navigation_Close_icon_60px_X_60px.png" />
+                        </div>
+                        <img class="floatLeft" id="matterCenterHome" title="{{vm.header.DashboardMenuImageUpperCaption}}" alt="" src="Images/MC_homepage_Logo.png" />
+                        <div class="floatLeft" style="color:#fff" id="divMatterHome" tabindex="0" aria-label="{{vm.header.DashboardMenuImageUpperCaption}} {{vm.header.DashboardMenuImageLowerCaption}}">
+                            <div class="upperSubText">{{vm.header.DashboardMenuImageUpperCaption}}</div>
+                            <div class="lowerSubText">{{vm.header.DashboardMenuImageLowerCaption}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-lg-5 mainSearch pad0">
+                <input id="searchText" type="text" placeholder="{{vm.header.DashboardHeaderSearchPlaceholderText}}" my-enter="vm.mainHeaderClick()" ng-model="vm.mainheadersearch" />
+                <div id="searchLink">
+                    <img class="searchIcon" title="{{vm.header.DashboardSearchIconTitle}}"
+                         alt="{{vm.header.DashboardSearchIconTitle}}" src="Images/search-15x15-666.png"
+                         ng-click="vm.mainHeaderClick()" />
+                </div>
+            </div>
+            <div class="col-xs-12" id="Mainflyout" ng-if="vm.showHeaderFlyout" ng-keydown="$event.keyCode==27?vm.showHamburgerIcon():null">
+                <div class="cur-pointer headerLinks" id="searchMatterTab">
+                    <span title="{{vm.header.Menu1Option2Text}}" id="menuMatterDashboardItem"
+                          ng-keydown="$event.keyCode==13?vm.navigateUrl('section=1'):null"
+                          ng-click="vm.navigateUrl('section=1')" aria-label="{{vm.header.Menu1Option2Text}} use tab to move to next item">
+                        {{vm.header.Menu1Option2Text}}
+                    </span>
+                </div>
+                <div class="cur-pointer headerLinks" id="searchDocumentTab">
+                    <span aria-label="{{vm.header.Menu1Option3Text}} use tab to move to next item"
+                          id="menuDocumentDashboardItem"
+                          ng-keydown="$event.keyCode==32?vm.navigateUrl('section=2'):null" title="{{vm.header.Menu1Option3Text}}" ng-click="vm.navigateUrl('section=2')">{{vm.header.Menu1Option3Text}}</span>
+                </div>
+                <div class="headerLinks">
+                    <a id="settingsLink">
+                        <span aria-label="{{vm.header.HamburgerMenuOption3Text}} use shift + tab to move to next item"
+                              id="menuSettingsDashboardItem"
+                              title="{{vm.header.HamburgerMenuOption3Text}}" ng-keydown="$event.keyCode==13?vm.navigateUrl(vm.header.HamburgerMenuOption3Text):null" ng-click="vm.navigateUrl(vm.header.HamburgerMenuOption3Text)">{{vm.header.HamburgerMenuOption3Text}}</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="matterCenterHeaderBackground" role="button"
+         ng-if="vm.showHeaderBackground"
+         ng-click="vm.showHamburgerIcon()"></div>
+    <main ui-view="contentView">
+
+    </main>
+
+    <footer id="footer" class="commonContent footer">
+        <div class="footerMaincontentDiv">
+            <div class="row">
+                <a aria-haspopup="true" href="http://www.microsoft.com/en-in/default.aspx" target="_parent">
+                    <img title="{{vm.header.FooterMenuOption4Text}}" class="mslogo imgNoBorder pull-right" alt="{{vm.header.FooterMenuOption4Text}}" src="Images/microsoft-grey-logo-sm.png" />
+                </a>
+            </div>
+            <div class="row text-right">
+                <ul class="footerLinks" role="menubar">
+                    <li class="rightFooterElement" role="menuitem"><a aria-haspopup="true" href="{{vm.header.FooterMenuOption1Value}}" target="_parent">{{vm.header.FooterMenuOption1Text}}</a></li>
+                    <li class="rightFooterElement" role="menuitem"><a aria-haspopup="true" href="{{vm.header.FooterMenuOption2Value}}" target="_parent">{{vm.header.FooterMenuOption2Text}}</a></li>
+                    <li class="rightFooterElement" role="menuitem"><a aria-haspopup="true" href="{{vm.header.FooterMenuOption3Value}}" target="_parent">{{vm.header.FooterMenuOption3Text}}</a></li>
+                    <li class="rightFooterElement copyRightElement" role="menuitem">© {{vm.currentyear}}  {{vm.header.FooterMenuOption4Text}}</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal fade" id="myErrorModal" tabindex="-1" role="dialog" aria-labelledby="myErrorModalLabel">
+        <div class="modal-dialog modal-lg modalDialogWidth" role="document">
+            <div class="modal-content popUpModalContainer modalContentMargin pad15 modelErrorContent " id="myModalContent">
+                <div class="popUpModalContainer errorModal">
+                    <h3 class="modal-title marleft10 colorRed">Error!</h3>
+                    <img title="Close" data-dismiss="modal" class="popUpCloseIcon popUpFloatRight popUpModalClose" alt="{{cm.createContent.Tab1ButtonCloseTitle}}" src="../Images/close-666.png">
+                    <div class="row margin0 marginTop10  segoUIFontBold " ng-show="vm.isDevMode">
+                        <div class="row margin0 marginTop10  segoUIFontBold colorRed" ng-if="$root.exceptionObj.description">
+                            <div class="col-lg-2 col-xs-12 col-md-4 col-sm-12">Description</div>
+                            <div class="col-lg-8 col-xs-12 col-md-8 col-sm-12">{{$root.exceptionObj.description}}</div>
+                        </div>
+                        <div class="row margin0 marginTop10  segoUIFontBold " ng-if="$root.exceptionObj.message">
+                            <div class="col-lg-2 col-xs-12 col-md-4 col-sm-12">Message</div>
+                            <div class="col-lg-8 col-xs-12 col-md-8 col-sm-12">{{$root.exceptionObj.message}}</div>
+                        </div>
+                        <div class="row margin0 marginTop10  segoUIFontBold " ng-if="$root.exceptionObj.value">
+                            <div class="col-lg-2 col-xs-12 col-md-4 col-sm-12">Value</div>
+                            <div class="col-lg-8 col-xs-12 col-md-8 col-sm-12">{{$root.exceptionObj.value}}</div>
+                        </div>
+                        <div class="row margin0 marginTop10  segoUIFontBold " ng-if="$root.exceptionObj.errorCode">
+                            <div class="col-lg-2 col-xs-12 col-md-4 col-sm-12">ErrorCode</div>
+                            <div class="col-lg-8 col-xs-12 col-md-8 col-sm-12">{{$root.exceptionObj.errorCode}}</div>
+                        </div>
+                        <div class="row margin0 marginTop10  segoUIFontBold " ng-if="$root.exceptionObj.methodName">
+                            <div class="col-lg-2 col-xs-12 col-md-4 col-sm-12">MethodName</div>
+                            <div class="col-lg-8 col-xs-12 col-md-8 col-sm-12">{{($root.exceptionObj.methodName==undefined||$root.exceptionObj.methodName=="")?"NA":$root.exceptionObj.methodName}}</div>
+                        </div>
+                        <div class="row margin0 marginTop10  segoUIFontBold " ng-if="$root.exceptionObj.className">
+                            <div class="col-lg-2 col-xs-12 col-md-4 col-sm-12">ClassName</div>
+                            <div class="col-lg-8 col-xs-12 col-md-8 col-sm-12">{{$root.exceptionObj.className}}</div>
+                        </div>
+                        <div class="row margin0 marginTop10  segoUIFontBold " ng-if="$root.exceptionObj.lineNumber">
+                            <div class="col-lg-2 col-xs-12 col-md-4 col-sm-12">LineNumber </div>
+                            <div class="col-lg-8 col-xs-12 col-md-8 col-sm-12">{{$root.exceptionObj.lineNumber}}</div>
+                        </div>
+                        <div class="row margin0 marginTop10  segoUIFontBold  " ng-if="$root.exceptionObj.stackTrace">
+                            <div class="col-lg-2 col-xs-12 col-md-4 col-sm-12">StackTrace</div>
+                            <div class="col-lg-8 col-xs-12 col-md-8 col-sm-12" style="overflow:auto">{{$root.exceptionObj.stackTrace}}</div>
+                        </div>
+
+
+                    </div>
+                    <div class="row margin0 marginTop10  segoUIFontBold " ng-show="!vm.isDevMode">
+                        <div class="row margin0 marginTop10  segoUIFontBold colorRed" ng-if="$root.exceptionObj.description">
+                            <div class="col-lg-2 col-xs-12 col-md-3 col-sm-12 ">Description</div>
+                            <div class="col-lg-10 col-xs-12 col-md-8 col-sm-12">{{$root.exceptionObj.description}}</div>
+                        </div>
+                        <div class="row margin0 marginTop10  segoUIFontBold " ng-if="$root.exceptionObj.message">
+                            <div class="col-lg-2 col-xs-12 col-md-4 col-sm-12">Message</div>
+                            <div class="col-lg-8 col-xs-12 col-md-8 col-sm-12">{{$root.exceptionObj.message}}</div>
+                        </div>
+                        <div class="row margin0 marginTop10  segoUIFontBold " ng-if="$root.exceptionObj.value">
+                            <div class="col-lg-2 col-xs-12 col-md-4 col-sm-12">Value</div>
+                            <div class="col-lg-8 col-xs-12 col-md-8 col-sm-12">{{$root.exceptionObj.value}}</div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
