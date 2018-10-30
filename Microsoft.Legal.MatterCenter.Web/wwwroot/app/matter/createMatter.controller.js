@@ -3638,7 +3638,8 @@
 
                 angular.forEach(cm.inputs, function (input) {
                     var field = { FieldDisplayName: "", FieldName: "", Type: "", FieldValue: "", IsDisplayInUI: "true" }
-                    field.FieldDisplayName = input.name;
+                    //field.FieldDisplayName = input.name;  //Changed for Clarity CCC
+                    field.FieldDisplayName = input.fieldDisplayName;
                     field.FieldName = input.fieldInternalName;
                     field.Type = input.type;
                     field.IsDisplayInUI = input.displayInUI.toString();
@@ -3669,7 +3670,7 @@
                         Fields.push(field);
                     }
                 });
-                return Fields;
+                return Fields;  
             }
 
             angular.element("#conflictCheck ul li a").prop("tabindex", "0");

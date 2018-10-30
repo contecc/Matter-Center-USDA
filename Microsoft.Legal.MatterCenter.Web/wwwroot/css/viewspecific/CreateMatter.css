@@ -1585,7 +1585,8 @@ left: -19px;
     animation: spin 2s infinite linear;
 }
 .directiveFormFields{
-    width:180px;
+    /*Changed from 180px to accompdate the long values in the multichoice*/
+    width:225px;  
 }
 .multiSelectHeight{
     height:100px;
@@ -1602,7 +1603,7 @@ left: -19px;
 .directiveMatterExtraFields{
     /*padding-right:190px;
     float:right;*/
-        padding-left: 15px;
+            padding-left: 15px;
 }
 
 .directiveMatterExtraBoolField{

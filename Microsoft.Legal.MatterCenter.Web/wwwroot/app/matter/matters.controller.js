@@ -3538,7 +3538,7 @@
                 angular.forEach(vm.matterExtraFields, function (input) {
                     var field = { FieldDisplayName: "", FieldName: "", Type: "", FieldValue: "", IsDisplayInUI: "true" }
                     field.FieldDisplayName = input.name;
-                    field.FieldName = input.fieldInternalName;
+                    field.FieldName = input.    fieldInternalName;
                     field.Type = input.type;
                     field.IsDisplayInUI = input.displayInUI.toString();
                     if (input.type == "Dropdown") {

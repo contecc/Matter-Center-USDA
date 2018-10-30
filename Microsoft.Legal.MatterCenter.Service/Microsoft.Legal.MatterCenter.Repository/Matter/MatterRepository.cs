@@ -1856,11 +1856,18 @@ namespace Microsoft.Legal.MatterCenter.Repository
                         {
                             addFields.Add(new MatterExtraFields
                             {
+
+                                //Add in Field Setting for ALL (Including the FieldValues and FieldType!!!
+
                                 FieldName = objFieldData["FieldName"].ToString(),
+                                Type = objFieldData["Type"].ToString(),
+                                FieldValue = objFieldData["FieldValue"].ToString(),
+                                FieldDisplayName = objFieldData["FieldDisplayName"].ToString(),
                                 IsDisplayInUI = string.IsNullOrWhiteSpace(objFieldData["IsDisplayInUI"].ToString().ToLower()) ? "false"
                                                  : objFieldData["IsDisplayInUI"].ToString().ToLower(),
                                 IsMandatory = string.IsNullOrWhiteSpace(objFieldData["IsMandatory"].ToString().ToLower()) ? "false"
                                                  : objFieldData["IsMandatory"].ToString().ToLower()
+
                             });
                         }
                     }

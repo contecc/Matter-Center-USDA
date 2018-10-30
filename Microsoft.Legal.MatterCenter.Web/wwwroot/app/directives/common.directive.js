@@ -582,17 +582,28 @@
                             if (scope.input.defaultValue != null && scope.input.defaultValue != undefined) {
                                 scope.input.value = scope.input.defaultValue;
                             }
-                            el.append('<div class="directiveMatterExtraBoolField"><input  ng-checked="{{input.value}}" id="' + scope.input.fieldInternalName + '"  aria-label="' + scope.input.fieldInternalName + '"  type="checkbox" ng-model="input.value"/></div>');
+                            el.append('<div class="directiveMatterExtraBoolField"><input  ng-checked="{{input.value}}" id="' + scope.input.fieldInternalName + '"  aria-label="' + scope.input.feldDisplayName + '"  type="checkbox" ng-model="input.value"/></div>');
                             break;
                         case 'text':
                             if (scope.input.defaultValue != null && scope.input.defaultValue != undefined) {
                                 scope.input.value = scope.input.defaultValue;
                             }
                             if (scope.input.required == "true") {
-                                el.append('<div class="directiveMatterExtraFields"><input id="' + scope.input.fieldInternalName + '" class="directiveFormFields" aria-label="' + scope.input.fieldInternalName + '" ng-class="{errorBorder: (input.value == undefined && cm.addFieldReq == true)}"  required type="text" ng-model="input.value"/></div>');
+                                el.append('<div class="directiveMatterExtraFields"><input id="' + scope.input.fieldInternalName + '" class="directiveFormFields" aria-label="' + scope.input.feldDisplayName + '" ng-class="{errorBorder: (input.value == undefined && cm.addFieldReq == true)}"  required type="text" ng-model="input.value"/></div>');
                             }
                             else {
-                                el.append('<div class="directiveMatterExtraFields"><input id="' + scope.input.fieldInternalName + '" aria-label="' + scope.input.fieldInternalName + '" class="directiveFormFields" type="text" ng-model="input.value"/></div>');
+                                el.append('<div class="directiveMatterExtraFields"><input id="' + scope.input.fieldInternalName + '" aria-label="' + scope.input.fieldDisplayName + '" class="directiveFormFields" type="text" ng-model="input.value"/></div>');
+                            }
+                            break;
+                        case 'currency':
+                            if (scope.input.defaultValue != null && scope.input.defaultValue != undefined) {
+                                scope.input.value = scope.input.defaultValue;
+                            }
+                            if (scope.input.required == "true") {
+                                el.append('<div class="directiveMatterExtraFields"><input id="' + scope.input.fieldInternalName + '" class="directiveFormFields" aria-label="' + scope.input.feldDisplayName + '" ng-class="{errorBorder: (input.value == undefined && cm.addFieldReq == true)}"  required type="text" ng-model="input.value"/></div>');
+                            }
+                            else {
+                                el.append('<div class="directiveMatterExtraFields"><input id="' + scope.input.fieldInternalName + '" aria-label="' + scope.input.fieldDisplayName + '" class="directiveFormFields" type="text" ng-model="input.value"/></div>');
                             }
                             break;
                         case 'radiobuttons':
