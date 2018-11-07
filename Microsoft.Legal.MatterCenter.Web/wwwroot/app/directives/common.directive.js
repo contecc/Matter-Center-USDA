@@ -574,7 +574,7 @@
                     else {
                         el.append('<div><span ng-show="' + scope.input.required + '" class="mandatory pull-left">*&nbsp;</span>' +
                            '<span ng-hide="' + scope.input.required + '" class="pull-left">&nbsp;&nbsp;&nbsp;&nbsp;</span>' +
-                           '<label class="directiveFormFieldsLableWidth" >{{input.name}}: </label></div>');
+                           '<label class="directiveFormFieldsLableWidth" >{{input.fieldDisplayName}}: </label></div>');
                     }
 
                     switch (scope.input.type.toLowerCase()) {
@@ -583,6 +583,21 @@
                                 scope.input.value = scope.input.defaultValue;
                             }
                             el.append('<div class="directiveMatterExtraBoolField"><input  ng-checked="{{input.value}}" id="' + scope.input.fieldInternalName + '"  aria-label="' + scope.input.feldDisplayName + '"  type="checkbox" ng-model="input.value"/></div>');
+                            break;
+                        case 'checktext':
+                            if (scope.input.defaultValue != null && scope.input.defaultValue != undefined) {
+                                scope.input.value = scope.input.defaultValue;
+                            }
+
+                            el.append('<span>N/A</span><div class="directiveMatterExtraBoolField"><input id="checktext_' + scope.input.fieldInternalName + '"  aria-label="' + scope.input.feldDisplayName + '"  type="checkbox" /></div>');
+
+                            if (scope.input.required == "true") {
+
+                                el.append('<div class="directiveMatterExtraFields"><input id="' + scope.input.fieldInternalName + '" class="directiveFormFields" aria-label="' + scope.input.feldDisplayName + '" ng-class="{errorBorder: (input.value == undefined && cm.addFieldReq == true)}"  required type="text" ng-model="input.value"/></div>');
+                            }
+                            else {
+                                el.append('<div class="directiveMatterExtraFields"><input id="' + scope.input.fieldInternalName + '" aria-label="' + scope.input.fieldDisplayName + '" class="directiveFormFields" type="text" ng-model="input.value"/></div>');
+                            }
                             break;
                         case 'text':
                             if (scope.input.defaultValue != null && scope.input.defaultValue != undefined) {

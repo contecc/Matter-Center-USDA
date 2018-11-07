@@ -70,6 +70,7 @@
             </div>
             <div id="HeaderPlaceHolder" class="padlf40">
                 <span tabindex="-1" class="AppLogoContainer">
+                    <img tabindex="-1" ng-show="!vm.globalSettings.isBackwardCompatible" class="AppLogo" style="max-height:35px;float:left;margin-right:5px;" aria-label="{{vm.usdatitle}}" src="Images/USDA_Logo.png">
                     <img tabindex="-1" ng-show="!vm.globalSettings.isBackwardCompatible" class="AppLogo" aria-label="{{vm.header.LogoImageTitle}}" src="Images/MC_Logo.png">
                     <span ng-if="vm.globalSettings.isBackwardCompatible" class="ApplogoFirstPart">CELA </span>
                     <span ng-if="vm.globalSettings.isBackwardCompatible" class="ApplogoSecondPart">Project Center</span>

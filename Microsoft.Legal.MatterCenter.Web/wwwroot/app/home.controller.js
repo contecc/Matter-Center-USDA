@@ -11,6 +11,7 @@
             configs.ADAL.authUserEmail = adalService.userInfo.userName
             vm.fullName = adalService.userInfo.profile.given_name + ' ' + adalService.userInfo.profile.family_name
             vm.isAuthenticated = adalService.userInfo.isAuthenticated
+            vm.USDATitle = "United States Department of Agriculture (USDA)";
             vm.smallPictureUrl = 'Images/MC_Profile_Switcher.png';
             vm.largePictureUrl = 'Images/mc_profile_switcher_72.png';
             vm.userProfileObjectId = adalService.userInfo.profile.oid;

@@ -1309,7 +1309,8 @@
                     getmatterprovisionextraproperties(optionsForGetmatterprovisionextraproperties, function (result) {
                         console.log(result);
                         $("#divExtraMatterProps").removeClass("ng-hide"); 
-                        $("#showDocumentAdditionalProp").removeClass("ng-hide");                        
+                        $("#showDocumentAdditionalProp").removeClass("ng-hide");
+                        debugger;
 
                         vm.extraMatterFields = result.Fields;
                         angular.forEach(vm.extraMatterFields, function (field) {

@@ -1937,24 +1937,34 @@ namespace Microsoft.Legal.MatterCenter.Repository
                         jw.WritePropertyName("fieldInternalName");
                         jw.WriteValue(field.InternalName);
 
-                        jw.WritePropertyName("required");
+
                         string isRequired= "false";
                         string required = "false";
                         string isDisplayInUI = "false";
+                        string fieldDisplayName = "";
+                        string customType = "";
                        
                         foreach (var item in addFields)
                         {
                         
                             if(item.FieldName== field.InternalName)
                             {
-                                 isRequired = addFields.Count > 0 ? addFields.Where(x => x.FieldName == field.InternalName).SingleOrDefault().IsMandatory : field.Required.ToString();
-                                 required = string.IsNullOrWhiteSpace(isRequired) ? false.ToString() : isRequired.ToLower();
-                                 isDisplayInUI = addFields.Count > 0 ? addFields.Where(x => x.FieldName == field.InternalName).SingleOrDefault().IsDisplayInUI : "false";
+
+                                fieldDisplayName = addFields.Where(x => x.FieldName == field.InternalName).SingleOrDefault().FieldDisplayName;
+                                isRequired = addFields.Count > 0 ? addFields.Where(x => x.FieldName == field.InternalName).SingleOrDefault().IsMandatory : field.Required.ToString();
+                                required = string.IsNullOrWhiteSpace(isRequired) ? false.ToString() : isRequired.ToLower();
+                                isDisplayInUI = addFields.Count > 0 ? addFields.Where(x => x.FieldName == field.InternalName).SingleOrDefault().IsDisplayInUI : "false";
+                                customType = addFields.Where(x => x.FieldName == field.InternalName).SingleOrDefault().Type;
                                 break;
                             }
                            
                         }
-                       
+
+                        jw.WritePropertyName("fieldDisplayName");
+                        jw.WriteValue(fieldDisplayName);
+
+
+                        jw.WritePropertyName("required");
                         jw.WriteValue(required);
 
                         jw.WritePropertyName("displayInUI");
@@ -2016,6 +2026,19 @@ namespace Microsoft.Legal.MatterCenter.Repository
                             }
 
                             jw.WriteEndArray();
+                        }
+                        else if (field.TypeAsString == "Text")
+                        {
+                            jw.WritePropertyName("type");
+
+                            if (customType == "CheckText")
+                            {
+                                jw.WriteValue("CheckText");
+                            }
+                            else
+                            {
+                                jw.WriteValue(Convert.ToString(field.TypeAsString));
+                            }
                         }
                         else
                         {
