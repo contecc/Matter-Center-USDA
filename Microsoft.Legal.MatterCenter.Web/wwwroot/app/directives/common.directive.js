@@ -633,12 +633,12 @@
                                 }
 
                                 for (var i = 0; i < scope.input.values.length; i++) {
-                                    radioButtontText += '<input name="radioGroup' + scope.input.values[i].fieldInternalName + '" type="radio" aria-label="' + scope.input.fieldInternalName + '" ng-model="input.value" value="' + scope.input.values[i].choiceValue + '"><label id="">' + scope.input.values[i].choiceValue + ' </label>'
+                                    radioButtontText += '<input name="radioGroup' + scope.input.fieldInternalName + '" type="radio" aria-label="' + scope.input.fieldInternalName + '" ng-model="input.value" value="' + scope.input.values[i].choiceValue + '"><label id="">' + scope.input.values[i].choiceValue + ' </label>'
                                 }
                             }
                             else {
                                 for (var i = 0; i < scope.input.values.length; i++) {
-                                    radioButtontText += '<input name="radioGroup' + scope.input.values[i].fieldInternalName + '" type="radio"  aria-label="' + scope.input.fieldInternalName + '" ng-model="input.value" value="' + scope.input.values[i].choiceValue + '"><label id="">' + scope.input.values[i].choiceValue + ' </label>'
+                                    radioButtontText += '<input name="radioGroup' + scope.input.fieldInternalName + '" type="radio"  aria-label="' + scope.input.fieldInternalName + '" ng-model="input.value" value="' + scope.input.values[i].choiceValue + '"><label id="">' + scope.input.values[i].choiceValue + ' </label>'
                                 }
                             }
                             el.append('<div class="directiveMatterExtraFields">' + radioButtontText + '</div>')

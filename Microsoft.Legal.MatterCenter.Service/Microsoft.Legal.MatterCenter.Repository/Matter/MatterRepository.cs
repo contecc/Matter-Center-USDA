@@ -1950,11 +1950,17 @@ namespace Microsoft.Legal.MatterCenter.Repository
                             if(item.FieldName== field.InternalName)
                             {
 
-                                fieldDisplayName = addFields.Where(x => x.FieldName == field.InternalName).SingleOrDefault().FieldDisplayName;
-                                isRequired = addFields.Count > 0 ? addFields.Where(x => x.FieldName == field.InternalName).SingleOrDefault().IsMandatory : field.Required.ToString();
+                                fieldDisplayName = addFields.Where(x => x.FieldName == field.InternalName).FirstOrDefault().FieldDisplayName;
+                                isRequired = addFields.Count > 0 ? addFields.Where(x => x.FieldName == field.InternalName).FirstOrDefault().IsMandatory : field.Required.ToString();
                                 required = string.IsNullOrWhiteSpace(isRequired) ? false.ToString() : isRequired.ToLower();
-                                isDisplayInUI = addFields.Count > 0 ? addFields.Where(x => x.FieldName == field.InternalName).SingleOrDefault().IsDisplayInUI : "false";
-                                customType = addFields.Where(x => x.FieldName == field.InternalName).SingleOrDefault().Type;
+                                isDisplayInUI = addFields.Count > 0 ? addFields.Where(x => x.FieldName == field.InternalName).FirstOrDefault().IsDisplayInUI : "false";
+                                customType = addFields.Where(x => x.FieldName == field.InternalName).FirstOrDefault().Type;
+                                
+                                //Replaced SingleOrDefault with FirstOrDefault:  It works by need to double check as to why with Aaron Grant 
+                                //The problem is that you are using SingleOrDefault.This method will only succeed when the collections contains exactly 0 or 1 element.I believe you are looking for FirstOrDefault which will succeed no matter how many elements are in the collection.
+                                //https://stackoverflow.com/questions/1256757/sequence-contains-more-than-one-element                         
+                                
+
                                 break;
                             }
                            
