@@ -18,11 +18,18 @@ namespace Microsoft.Legal.MatterCenter.Models
     {
 
         public string FieldName { get; set; }
+        public string FieldHelp { get; set; }
+        public string FieldChildren { get; set; }
         public string Type { get; set; }
         public string FieldValue { get; set; }
         public string FieldDisplayName { get; set; }
         public string IsDisplayInUI { get; set; }
         public string IsMandatory { get; set; }
+
+        public override string ToString()
+        {
+            return string.Concat(FieldName, ",", Type);
+        }
 
     }
 }

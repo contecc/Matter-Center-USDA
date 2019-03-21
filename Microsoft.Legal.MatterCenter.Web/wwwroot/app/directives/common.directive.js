@@ -470,6 +470,8 @@
         }
     }
 
+
+
     'use strict'
     function assignTeamKeyDown() {
         return function (scope, element, attrs) {
@@ -569,12 +571,12 @@
                         scope.input.required = false;
                         el.append('<div class="directiveMatterExtraBoolLabel"><span ng-show="' + scope.input.required + '" class="mandatory pull-left">*&nbsp;</span>' +
                            '<span ng-hide="' + scope.input.required + '" class="pull-left">&nbsp;&nbsp;&nbsp;&nbsp;</span>' +
-                           '<label class="directiveFormFieldsLableWidth" >{{input.name}}: </label></div>');
+                           '<label id="{{input.fieldInternalName}}" class="directiveFormFieldsLabelWidth" >{{input.name}}: </label></div>');
                     }
                     else {
                         el.append('<div><span ng-show="' + scope.input.required + '" class="mandatory pull-left">*&nbsp;</span>' +
                            '<span ng-hide="' + scope.input.required + '" class="pull-left">&nbsp;&nbsp;&nbsp;&nbsp;</span>' +
-                           '<label class="directiveFormFieldsLableWidth" >{{input.fieldDisplayName}}: </label></div>');
+                           '<label id="{{input.fieldInternalName}}_label" class="directiveFormFieldsLabelWidth" >{{input.fieldDisplayName}}: </label></div>');
                     }
 
                     switch (scope.input.type.toLowerCase()) {
@@ -582,21 +584,21 @@
                             if (scope.input.defaultValue != null && scope.input.defaultValue != undefined) {
                                 scope.input.value = scope.input.defaultValue;
                             }
-                            el.append('<div class="directiveMatterExtraBoolField"><input  ng-checked="{{input.value}}" id="' + scope.input.fieldInternalName + '"  aria-label="' + scope.input.feldDisplayName + '"  type="checkbox" ng-model="input.value"/></div>');
+                            el.append('<div class="directiveMatterExtraBoolField"><input  ng-checked="{{input.value}}" id="' + scope.input.fieldInternalName + '" title="' + scope.input.fieldHelp + '"  aria-label="' + scope.input.feldDisplayName + '"  type="checkbox" ng-model="input.value"/></div>');
                             break;
                         case 'checktext':
                             if (scope.input.defaultValue != null && scope.input.defaultValue != undefined) {
                                 scope.input.value = scope.input.defaultValue;
                             }
 
-                            el.append('<span>N/A</span><div class="directiveMatterExtraBoolField"><input id="checktext_' + scope.input.fieldInternalName + '"  aria-label="' + scope.input.feldDisplayName + '"  type="checkbox" /></div>');
+                            el.append('<span>N/A</span><div class="directiveMatterExtraBoolField"><input id="checktext_' + scope.input.fieldInternalName + '" title="' + scope.input.fieldHelp + '" title="' + scope.input.fieldHelp + '"  aria-label="' + scope.input.feldDisplayName + '"  type="checkbox" /></div>');
 
                             if (scope.input.required == "true") {
 
-                                el.append('<div class="directiveMatterExtraFields"><input id="' + scope.input.fieldInternalName + '" class="directiveFormFields" aria-label="' + scope.input.feldDisplayName + '" ng-class="{errorBorder: (input.value == undefined && cm.addFieldReq == true)}"  required type="text" ng-model="input.value"/></div>');
+                                el.append('<div class="directiveMatterExtraFields"><input id="' + scope.input.fieldInternalName + '" title="' + scope.input.fieldHelp + '" class="directiveFormFields" aria-label="' + scope.input.feldDisplayName + '" ng-class="{errorBorder: (input.value == undefined && cm.addFieldReq == true)}"  required type="text" ng-model="input.value"/></div>');
                             }
                             else {
-                                el.append('<div class="directiveMatterExtraFields"><input id="' + scope.input.fieldInternalName + '" aria-label="' + scope.input.fieldDisplayName + '" class="directiveFormFields" type="text" ng-model="input.value"/></div>');
+                                el.append('<div class="directiveMatterExtraFields"><input id="' + scope.input.fieldInternalName + '" title="' + scope.input.fieldHelp + '" aria-label="' + scope.input.fieldDisplayName + '" class="directiveFormFields" type="text" ng-model="input.value"/></div>');
                             }
                             break;
                         case 'text':
@@ -604,10 +606,21 @@
                                 scope.input.value = scope.input.defaultValue;
                             }
                             if (scope.input.required == "true") {
-                                el.append('<div class="directiveMatterExtraFields"><input id="' + scope.input.fieldInternalName + '" class="directiveFormFields" aria-label="' + scope.input.feldDisplayName + '" ng-class="{errorBorder: (input.value == undefined && cm.addFieldReq == true)}"  required type="text" ng-model="input.value"/></div>');
+                                el.append('<div class="directiveMatterExtraFields"><input id="' + scope.input.fieldInternalName + '" title="' + scope.input.fieldHelp + '" class="directiveFormFields" aria-label="' + scope.input.feldDisplayName + '" ng-class="{errorBorder: (input.value == undefined && cm.addFieldReq == true)}"  required type="text" ng-model="input.value"/></div>');
                             }
                             else {
-                                el.append('<div class="directiveMatterExtraFields"><input id="' + scope.input.fieldInternalName + '" aria-label="' + scope.input.fieldDisplayName + '" class="directiveFormFields" type="text" ng-model="input.value"/></div>');
+                                el.append('<div class="directiveMatterExtraFields"><input id="' + scope.input.fieldInternalName + '" title="' + scope.input.fieldHelp + '" aria-label="' + scope.input.fieldDisplayName + '" class="directiveFormFields" type="text" ng-model="input.value"/></div>');
+                            }
+                            break;
+                        case 'note':
+                            if (scope.input.defaultValue != null && scope.input.defaultValue != undefined) {
+                                scope.input.value = scope.input.defaultValue;
+                            }
+                            if (scope.input.required == "true") {
+                                el.append('<div class="directiveMatterExtraFields"><textarea rows="4" id="' + scope.input.fieldInternalName + '" title="' + scope.input.fieldHelp + '" class="directiveFormFields" aria-label="' + scope.input.feldDisplayName + '" ng-class="{errorBorder: (input.value == undefined && cm.addFieldReq == true)}"  required ng-model="input.value"/></div>');
+                            }
+                            else {
+                                el.append('<div class="directiveMatterExtraFields"><textarea rows="4" id="' + scope.input.fieldInternalName + '" title="' + scope.input.fieldHelp + '" aria-label="' + scope.input.fieldDisplayName + '" class="directiveFormFields" ng-model="input.value"/></div>');
                             }
                             break;
                         case 'currency':
@@ -615,10 +628,10 @@
                                 scope.input.value = scope.input.defaultValue;
                             }
                             if (scope.input.required == "true") {
-                                el.append('<div class="directiveMatterExtraFields"><input id="' + scope.input.fieldInternalName + '" class="directiveFormFields" aria-label="' + scope.input.feldDisplayName + '" ng-class="{errorBorder: (input.value == undefined && cm.addFieldReq == true)}"  required type="text" ng-model="input.value"/></div>');
+                                el.append('<div class="directiveMatterExtraFields"><input id="' + scope.input.fieldInternalName + '" title="' + scope.input.fieldHelp + '" class="directiveFormFields" aria-label="' + scope.input.feldDisplayName + '" ng-class="{errorBorder: (input.value == undefined && cm.addFieldReq == true)}"  required type="text" ng-model="input.value"/></div>');
                             }
                             else {
-                                el.append('<div class="directiveMatterExtraFields"><input id="' + scope.input.fieldInternalName + '" aria-label="' + scope.input.fieldDisplayName + '" class="directiveFormFields" type="text" ng-model="input.value"/></div>');
+                                el.append('<div class="directiveMatterExtraFields"><input id="' + scope.input.fieldInternalName + '" title="' + scope.input.fieldHelp + '" aria-label="' + scope.input.fieldDisplayName + '" class="directiveFormFields" type="text" ng-model="input.value"/></div>');
                             }
                             break;
                         case 'radiobuttons':
@@ -633,12 +646,12 @@
                                 }
 
                                 for (var i = 0; i < scope.input.values.length; i++) {
-                                    radioButtontText += '<input name="radioGroup' + scope.input.fieldInternalName + '" type="radio" aria-label="' + scope.input.fieldInternalName + '" ng-model="input.value" value="' + scope.input.values[i].choiceValue + '"><label id="">' + scope.input.values[i].choiceValue + ' </label>'
+                                    radioButtontText += '<input onClick="showHideControls(\'' + scope.input.fieldInternalName + '\')" name="radioGroup' + scope.input.fieldInternalName + '" type="radio" aria-label="' + scope.input.fieldInternalName + '" title="' + scope.input.fieldHelp + '" ng-model="input.value" value="' + scope.input.values[i].choiceValue + '"><label id="">' + scope.input.values[i].choiceValue + ' </label>'
                                 }
                             }
                             else {
                                 for (var i = 0; i < scope.input.values.length; i++) {
-                                    radioButtontText += '<input name="radioGroup' + scope.input.fieldInternalName + '" type="radio"  aria-label="' + scope.input.fieldInternalName + '" ng-model="input.value" value="' + scope.input.values[i].choiceValue + '"><label id="">' + scope.input.values[i].choiceValue + ' </label>'
+                                    radioButtontText += '<input onClick="showHideControls(\'' + scope.input.fieldInternalName + '\')"   name="radioGroup' + scope.input.fieldInternalName + '" type="radio"  aria-label="' + scope.input.fieldInternalName + '" title="' + scope.input.fieldHelp + '" ng-model="input.value" value="' + scope.input.values[i].choiceValue + '"><label id="">' + scope.input.values[i].choiceValue + ' </label>'
                                 }
                             }
                             el.append('<div class="directiveMatterExtraFields">' + radioButtontText + '</div>')
@@ -653,10 +666,10 @@
                                 });                               
                             }                           
                             if (scope.input.required == "true") {
-                                el.append('<div class="directiveMatterExtraFields"><select id="' + scope.input.fieldInternalName + '" aria-label="' + scope.input.fieldInternalName + '" class="directiveFormFields" ng-class="{errorBorder: (input.value == undefined && cm.addFieldReq == true)}" required ng-model="input.value" ng-options=" x.choiceValue   for x in  input.values "> <option value="" label="- Select -"></option></select></div>')
+                                el.append('<div class="directiveMatterExtraFields"><select id="' + scope.input.fieldInternalName + '" aria-label="' + scope.input.fieldInternalName + '" title="' + scope.input.fieldHelp + '" class="directiveFormFields" ng-class="{errorBorder: (input.value == undefined && cm.addFieldReq == true)}" required ng-model="input.value" ng-options=" x.choiceValue   for x in  input.values "> <option value="" label="- Select -"></option></select></div>')
                             }
                             else {
-                                el.append('<div class="directiveMatterExtraFields"><select id="' + scope.input.fieldInternalName + '" aria-label="' + scope.input.fieldInternalName + '" class="directiveFormFields" ng-model="input.value" ng-options=" x.choiceValue   for x in  input.values "> <option value="" label="- Select -"></option></select></div>')
+                                el.append('<div class="directiveMatterExtraFields"><select id="' + scope.input.fieldInternalName + '" aria-label="' + scope.input.fieldInternalName + '" title="' + scope.input.fieldHelp + '" class="directiveFormFields" ng-model="input.value" ng-options=" x.choiceValue   for x in  input.values "> <option value="" label="- Select -"></option></select></div>')
                             }
                             break;
                         case 'datetime':
@@ -665,14 +678,14 @@
                                 scope.input.value = new Date(scope.input.value);
                             }
                             if (scope.input.required == "true") {
-                                el.append('<div class="directiveMatterExtraFields"> <input id="' + scope.input.fieldInternalName + '" class="directiveFormFields" aria-label="' + scope.input.fieldInternalName + '" ng-class="{errorBorder: (input.value == undefined && cm.addFieldReq == true)}" required type="text" class="calendar form-control " uib-datepicker-popup="MM/dd/yyyy" data-ng-model="input.value"  is-open="opened" placeholder="mm/dd/yyyy"  data-ng-model="" datepicker-options="dateOptions" ng-required="true" close-text="Close" readonly ng-keydown="$event.keyCode==13?open1():null"  ng-click="open1()"  /> </div>')
+                                el.append('<div class="directiveMatterExtraFields"> <input id="' + scope.input.fieldInternalName + '" class="directiveFormFields" aria-label="' + scope.input.fieldInternalName + '" title="' + scope.input.fieldHelp + '" ng-class="{errorBorder: (input.value == undefined && cm.addFieldReq == true)}" required type="text" class="calendar form-control " uib-datepicker-popup="MM/dd/yyyy" data-ng-model="input.value"  is-open="opened" placeholder="mm/dd/yyyy"  data-ng-model="" datepicker-options="dateOptions" ng-required="true" close-text="Close" readonly ng-keydown="$event.keyCode==13?open1():null"  ng-click="open1()"  /> </div>')
                             }
                             else {
-                                el.append('<div class="directiveMatterExtraFields"> <input id="' + scope.input.fieldInternalName + '" class="directiveFormFields" aria-label="' + scope.input.fieldInternalName + '" type="text" class="calendar form-control " uib-datepicker-popup="MM/dd/yyyy" data-ng-model="input.value"  is-open="opened" placeholder="mm/dd/yyyy"  data-ng-model="" datepicker-options="dateOptions" ng-required="true" close-text="Close" readonly ng-keydown="$event.keyCode==13?open1():null" ng-click="open1()"  /> </div>')
+                                el.append('<div class="directiveMatterExtraFields"> <input id="' + scope.input.fieldInternalName + '" class="directiveFormFields" aria-label="' + scope.input.fieldInternalName + '" title="' + scope.input.fieldHelp + '" type="text" class="calendar form-control " uib-datepicker-popup="MM/dd/yyyy" data-ng-model="input.value"  is-open="opened" placeholder="mm/dd/yyyy"  data-ng-model="" datepicker-options="dateOptions" ng-required="true" close-text="Close" readonly ng-keydown="$event.keyCode==13?open1():null" ng-click="open1()"  /> </div>')
                             }
                             break;
                         case 'multichoice':
-                            if (scope.input.defaultValue != null && scope.input.defaultValue != undefined) {                                
+                            if (scope.input.defaultValue != null && scope.input.defaultValue != undefined) {
                                 var defaultOptions = scope.input.defaultValue.split(',');
                                 scope.input.value = [];
                                 for (var aCount = 0; aCount < defaultOptions.length; aCount++) {
@@ -684,10 +697,49 @@
                                 }
                             }
                             if (scope.input.required == "true") {
-                                el.append('<div class="directiveMatterExtraFields"><select aria-label="' + scope.input.fieldInternalName + '"  id="' + scope.input.fieldInternalName + '" class="multiSelectHeight directiveFormFields" required style="height:100px;" multiple ng-model="input.value" ng-class="{errorBorder: (input.value == undefined && cm.addFieldReq == true)}" ng-options="x.choiceValue for x  in input.values "> <option value="" label="- Select -"></option></select></div>')
+                                el.append('<div class="directiveMatterExtraFields"><select aria-label="' + scope.input.fieldInternalName + '"  id="' + scope.input.fieldInternalName + '" title="' + scope.input.fieldHelp + '" class="multiSelectHeight directiveFormFields" required style="height:100px;" multiple ng-model="input.value" ng-class="{errorBorder: (input.value == undefined && cm.addFieldReq == true)}" ng-options="x.choiceValue for x  in input.values "> <option value="" label="- Select -"></option></select></div>')
                             }
                             else {
-                                el.append('<div class="directiveMatterExtraFields"><select aria-label="' + scope.input.fieldInternalName + '"  id="' + scope.input.fieldInternalName + '" class="multiSelectHeight directiveFormFields" required style="height:100px;" multiple ng-model="input.value" ng-options="x.choiceValue for x  in input.values "> <option value="" label="- Select -"></option></select></div>')
+                                el.append('<div class="directiveMatterExtraFields"><select aria-label="' + scope.input.fieldInternalName + '"  id="' + scope.input.fieldInternalName + '" title="' + scope.input.fieldHelp + '" class="multiSelectHeight directiveFormFields" required style="height:100px;" multiple ng-model="input.value" ng-options="x.choiceValue for x  in input.values "> <option value="" label="- Select -"></option></select></div>')
+                            }
+                            break;
+                        case 'taxonomyfieldtypemulti':
+                            //Add Default Selected Items 
+                            if (scope.input.defaultValue != null && scope.input.defaultValue != undefined) {                                
+                                var defaultOptions = scope.input.defaultValue.split(',');
+                                scope.input.value = [];
+                                for (var aCount = 0; aCount < defaultOptions.length; aCount++) {
+                                    angular.forEach(scope.input.values, function (option) {
+                                        if (option.choiceValue == defaultOptions[aCount]) {
+                                            scope.input.value.push(option);
+                                        }
+                                    });
+                                }
+                            }
+
+
+                            scope.groupedItems = [];
+                            
+
+                            //Process input.values to create Group Headers
+                            angular.forEach(scope.input.values, function (option) {
+                                
+                                if (option.choiceValue.includes(";")) {
+                                    var newOption = {
+                                        choiceId: option.choiceId,
+                                        choiceValue: option.choiceValue.split(";")[1],
+                                        choiceGroup: option.choiceValue.split(";")[0]
+                                    }
+                                    scope.groupedItems.push(newOption);
+                                }
+                            });
+
+
+                            if (scope.input.required == "true") {
+                                el.append('<div class="directiveMatterExtraFields"><select aria-label="' + scope.input.fieldInternalName + '"  id="' + scope.input.fieldInternalName + '" title="' + scope.input.fieldHelp + '" class="multiSelectHeight directiveFormFields" required style="height:100px;" multiple ng-model="input.value" ng-class="{errorBorder: (input.value == undefined && cm.addFieldReq == true)}" ng-options="x.choiceValue group by x.choiceGroup for x in groupedItems"></select></div>')
+                            }
+                            else {
+                                el.append('<div class="directiveMatterExtraFields"><select aria-label="' + scope.input.fieldInternalName + '"  id="' + scope.input.fieldInternalName + '" title="' + scope.input.fieldHelp + '" class="multiSelectHeight directiveFormFields" required style="height:100px;" multiple ng-model="input.value" ng-options="x.choiceValue group by x.choiceGroup for x in groupedItems"></select></div>')
                             }
                             break;
                     }

@@ -23,6 +23,63 @@
     }
 
 </style>
+
+
+<script type="text/javascript">
+    
+    //CCC     Chris Conte - Add  (Need to Migrate this code to JavaScript File)
+
+    function showHideSingleElement(elementName, controlValue) {
+        var element = document.getElementById(elementName);
+        if (controlValue === "Yes") {
+            element.style.display = "block";
+        } else {
+            element.style.display = "none";
+        }
+
+    }
+    function showHideControls(sourceControlName) {
+        //Show or Hide the controls related to the parent
+        //Take the childControlNames passed to the function
+        //Discover the Yes/No State of the sourceControlName
+        //Turn On/Off the controls based on the the source control
+
+        //ELEMENT NO LONGER EXISTS (On Purpose); Throws Error >>> document.getElementById("ExtraPropsTitle").innerText = "Text Set Via the Controller to H1 Element on Page";
+
+        switch(sourceControlName)
+        {
+
+            case "SettlementAwarded":
+                //console.log("Settlement Awarded was selected");
+                var controlValue = $('input[name=radioGroupSettlementAwarded]:radio:checked').val();
+                //console.log("Control = " + sourceControlName + "  was clicked");
+                //console.log("Control Value = " + controlValue);
+
+                showHideSingleElement("SettlementPaid", controlValue);
+                showHideSingleElement("SettlementPaid_label", controlValue);
+                showHideSingleElement("SettlementReceived", controlValue);
+                showHideSingleElement("SettlementReceived_label", controlValue);
+                break;
+
+            case "AttnyFeeApp":
+                console.log("Attorney Fee App was selected");
+                break;
+            case "AttnyFeeGranted":
+                console.log("Attorney Fee GRANTED was selected");
+                break;
+            default:
+                console.log("No Known Item was selected");
+        }
+
+
+
+       
+
+
+
+    }
+
+</script>
 <div class="row" id="divHeader">
     <div class="col-xs-10 col-sm-8 col-md-6 col-lg-10" style="margin-left: 45px;margin-top: 1px;height: 58px;">
         <div id="divTab1" tabindex="0" class="col-xs-10 col-sm-4 col-md-4 col-lg-2 zindex6 createMatterHeaderWidth focusBorder" style="cursor: pointer;font-size: 1.125em;line-height:40px; padding: 0 11px 0 13px;text-decoration: none !important;" title="{{cm.createContent.Tab1HeaderTitle}}" ng-click='cm.navigateToSecondSection("snOpenMatter")' ng-class='{menuTextSelected:cm.sectionName=="snOpenMatter"}' data-section-num="1" data-section-name="snOpenMatter">1  {{cm.createContent.Tab1Header}}</div>

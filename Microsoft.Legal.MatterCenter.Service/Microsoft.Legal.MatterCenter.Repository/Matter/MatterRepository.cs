@@ -12,22 +12,24 @@
 
 using Microsoft.Extensions.Options;
 using Microsoft.Legal.MatterCenter.Models;
-using Microsoft.Legal.MatterCenter.Utility;
-using System.Threading.Tasks;
+using Microsoft.Legal.MatterCenter.Repository.Extensions;
+using Microsoft.SharePoint.Client;
+using Microsoft.SharePoint.Client.Taxonomy;
+using Microsoft.SharePoint.Client.WebParts;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using Microsoft.SharePoint.Client;
-using Microsoft.SharePoint.Client.Utilities;
-using System.Globalization;
 using System.Collections.ObjectModel;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Net;
-using Newtonsoft.Json;
 using System.Reflection;
-using Microsoft.SharePoint.Client.WebParts;
 using System.Text;
-using System.IO;
-using Microsoft.Legal.MatterCenter.Repository.Extensions;
+using System.Threading.Tasks;
+using Microsoft.Legal.MatterCenter.Utility;
+using System.Collections.Specialized;
+using System.Collections;
 
 namespace Microsoft.Legal.MatterCenter.Repository
 {
@@ -1858,10 +1860,12 @@ namespace Microsoft.Legal.MatterCenter.Repository
                             {
 
                                 //Add in Field Setting for ALL (Including the FieldValues and FieldType!!!
-
+                                //objFieldData = the JSON file 
                                 FieldName = objFieldData["FieldName"].ToString(),
                                 Type = objFieldData["Type"].ToString(),
                                 FieldValue = objFieldData["FieldValue"].ToString(),
+                                FieldChildren = objFieldData["FieldChildren"]?.ToString(),
+                                FieldHelp = objFieldData["FieldHelp"]?.ToString(),
                                 FieldDisplayName = objFieldData["FieldDisplayName"].ToString(),
                                 IsDisplayInUI = string.IsNullOrWhiteSpace(objFieldData["IsDisplayInUI"].ToString().ToLower()) ? "false"
                                                  : objFieldData["IsDisplayInUI"].ToString().ToLower(),
@@ -1943,18 +1947,21 @@ namespace Microsoft.Legal.MatterCenter.Repository
                         string isDisplayInUI = "false";
                         string fieldDisplayName = "";
                         string customType = "";
-                       
+                        string fieldHelp = "";
+                        string fieldChildren = default(string);
                         foreach (var item in addFields)
                         {
                         
                             if(item.FieldName== field.InternalName)
                             {
 
-                                fieldDisplayName = addFields.Where(x => x.FieldName == field.InternalName).FirstOrDefault().FieldDisplayName;
-                                isRequired = addFields.Count > 0 ? addFields.Where(x => x.FieldName == field.InternalName).FirstOrDefault().IsMandatory : field.Required.ToString();
+                                fieldDisplayName = addFields.Where(x => x.FieldName == field.InternalName).FirstOrDefault()?.FieldDisplayName;
+                                fieldHelp = addFields.Where(x => x.FieldName == field.InternalName).FirstOrDefault()?.FieldHelp;
+                                fieldChildren = addFields.Where(x => x.FieldName == field.InternalName).FirstOrDefault()?.FieldChildren;
+                                isRequired = addFields.Count > 0 ? addFields.Where(x => x.FieldName == field.InternalName).FirstOrDefault()?.IsMandatory : field.Required.ToString();
                                 required = string.IsNullOrWhiteSpace(isRequired) ? false.ToString() : isRequired.ToLower();
-                                isDisplayInUI = addFields.Count > 0 ? addFields.Where(x => x.FieldName == field.InternalName).FirstOrDefault().IsDisplayInUI : "false";
-                                customType = addFields.Where(x => x.FieldName == field.InternalName).FirstOrDefault().Type;
+                                isDisplayInUI = addFields.Count > 0 ? addFields.Where(x => x.FieldName == field.InternalName).FirstOrDefault()?.IsDisplayInUI : "false";
+                                customType = addFields.Where(x => x.FieldName == field.InternalName).FirstOrDefault()?.Type;
                                 
                                 //Replaced SingleOrDefault with FirstOrDefault:  It works by need to double check as to why with Aaron Grant 
                                 //The problem is that you are using SingleOrDefault.This method will only succeed when the collections contains exactly 0 or 1 element.I believe you are looking for FirstOrDefault which will succeed no matter how many elements are in the collection.
@@ -1965,6 +1972,14 @@ namespace Microsoft.Legal.MatterCenter.Repository
                             }
                            
                         }
+
+                        jw.WritePropertyName("fieldHelp");
+                        jw.WriteValue(fieldHelp);
+
+
+
+                        jw.WritePropertyName("fieldChildren");
+                        jw.WriteValue(fieldChildren);
 
                         jw.WritePropertyName("fieldDisplayName");
                         jw.WriteValue(fieldDisplayName);
@@ -1994,12 +2009,12 @@ namespace Microsoft.Legal.MatterCenter.Repository
                         {
                             jw.WritePropertyName("type");
                             jw.WriteValue(Convert.ToString(((Microsoft.SharePoint.Client.FieldChoice)field).EditFormat));
-                            List<string> options = GetChoiceFieldValues(clientContext, field);
+                            SortedDictionary<string,string> options = GetChoiceFieldValues(clientContext, field);
                             jw.WritePropertyName("values");
                             jw.WriteStartArray();
                             int optionCounter = 1;
 
-                            foreach (string option in options)
+                            foreach (string option in options.Values)
                             {
                                 jw.WriteStartObject();
                                 jw.WritePropertyName("choiceId");
@@ -2011,16 +2026,19 @@ namespace Microsoft.Legal.MatterCenter.Repository
                             }
                             jw.WriteEndArray();
                         }
-                        else if (field.TypeAsString == "MultiChoice")
+                        else if (field.TypeAsString == "MultiChoice" || field.TypeAsString == "TaxonomyFieldTypeMulti")
                         {
                             jw.WritePropertyName("type");
-                            jw.WriteValue(Convert.ToString(((Microsoft.SharePoint.Client.FieldMultiChoice)field).TypeAsString));
-                            List<string> options = GetChoiceFieldValues(clientContext, field);
+                            // jw.WriteValue(Convert.ToString(((Microsoft.SharePoint.Client.FieldMultiChoice)field).TypeAsString));
+                            jw.WriteValue(field.TypeAsString);
+
+
+                            SortedDictionary<string, string> options = GetChoiceFieldValues(clientContext, field);
                             jw.WritePropertyName("values");
                             jw.WriteStartArray();
                             int optionCounter = 1;
 
-                            foreach (string option in options)
+                            foreach (string option in options.Values)
                             {
                                 jw.WriteStartObject();
                                 jw.WritePropertyName("choiceId");
@@ -2070,18 +2088,59 @@ namespace Microsoft.Legal.MatterCenter.Repository
         /// <param name="clientContext"></param>
         /// <param name="fieldName"></param>
         /// <returns></returns>
-        private static List<string> GetChoiceFieldValues(ClientContext clientContext, SharePoint.Client.Field fieldName)
+        private static SortedDictionary<string,string> GetChoiceFieldValues(ClientContext clientContext, SharePoint.Client.Field field)
         {
-            List<string> fieldList = new List<string>();
+            //StringDictionary fieldList = new StringDictionary();
+            SortedDictionary<string, string> fieldList = new SortedDictionary<string, string>();
+
             try
             {
-                FieldChoice fieldChoice = clientContext.CastTo<FieldChoice>(fieldName);
-                clientContext.Load(fieldChoice, f => f.Choices);
-                clientContext.ExecuteQuery();
-                foreach (string item in fieldChoice.Choices)
+
+                if (field is FieldChoice || field is FieldMultiChoice)
                 {
-                    fieldList.Add(item.ToString());
+                    FieldChoice fieldChoice = clientContext.CastTo<FieldChoice>(field);
+                    clientContext.Load(fieldChoice, f => f.Choices);
+                    clientContext.ExecuteQuery();
+                    foreach (string item in fieldChoice.Choices)
+                    {
+                        fieldList.Add(Guid.NewGuid().ToString(), item);
+                    }
                 }
+                else {
+
+                    //This section of code is meant to produce the options for the multi-choice fields
+                    //using the taxonomy Managed MetaData Term Store
+                    if (field is TaxonomyField)
+                    {
+      
+                        var taxonomySession = TaxonomySession.GetTaxonomySession(clientContext);
+                        clientContext.Load(taxonomySession, ts => ts.TermStores);
+                        clientContext.ExecuteQuery();
+
+                        var termStore = taxonomySession.TermStores[0];
+                        clientContext.Load(termStore);
+                        clientContext.ExecuteQuery();
+
+                        var termSet = termStore.GetTermSet(new Guid("b09a5850-f34a-4905-9469-e678aecd4a90"));
+                       
+                        //var termSet = termStore.GetTermSetsByName("Program",1033);
+                        clientContext.Load(termSet);
+                        clientContext.ExecuteQuery();
+
+
+                        var terms = termSet.GetAllTerms();
+                        clientContext.Load(terms);
+                        clientContext.ExecuteQuery();
+
+
+                        foreach (var term in terms)
+                        {
+                            fieldList.Add(term.PathOfTerm, term.PathOfTerm);
+                        }
+
+                    } //endif
+
+                }  //end else
             }
             catch (Exception ex)
             {
