@@ -24,11 +24,12 @@
 
 </style>
 
-
+<!--TODO:  Recommend to move to a JavaScript File-->
 <script type="text/javascript">
     
-    //CCC     Chris Conte - Add  (Need to Migrate this code to JavaScript File)
-
+    /*
+    Hide or Show Element (for the Collapse Capability)
+    */
     function showHideSingleElement(elementName, controlValue) {
         var element = document.getElementById(elementName);
         if (controlValue === "Yes") {
@@ -37,28 +38,57 @@
             element.style.display = "none";
         }
 
+        //Show/Hide related elements
+        var element = document.getElementById("_mandatory_" + elementName);
+        if(element != null){
+            if (controlValue === "Yes") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+
+        //Show/Hide related elements
+        var element = document.getElementById(elementName + "_label");
+        if (element != null) {
+            if (controlValue === "Yes") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+
+
     }
+
+    /*
+    Show or Hide the controls related to the parent
+    Take the childControlNames passed to the function
+    Discover the Yes/No State of the sourceControlName
+    Turn On/Off the controls based on the the source control
+    */
     function showHideControls(sourceControlName) {
-        //Show or Hide the controls related to the parent
-        //Take the childControlNames passed to the function
-        //Discover the Yes/No State of the sourceControlName
-        //Turn On/Off the controls based on the the source control
 
-        //ELEMENT NO LONGER EXISTS (On Purpose); Throws Error >>> document.getElementById("ExtraPropsTitle").innerText = "Text Set Via the Controller to H1 Element on Page";
-
-        switch(sourceControlName)
+        switch (sourceControlName)
         {
 
             case "SettlementAwarded":
                 //console.log("Settlement Awarded was selected");
                 var controlValue = $('input[name=radioGroupSettlementAwarded]:radio:checked').val();
-                //console.log("Control = " + sourceControlName + "  was clicked");
-                //console.log("Control Value = " + controlValue);
-
                 showHideSingleElement("SettlementPaid", controlValue);
-                showHideSingleElement("SettlementPaid_label", controlValue);
+                //showHideSingleElement("SettlementPaid_label", controlValue);
                 showHideSingleElement("SettlementReceived", controlValue);
-                showHideSingleElement("SettlementReceived_label", controlValue);
+                //showHideSingleElement("SettlementReceived_label", controlValue);
+                break;
+
+            case "DamagesAwarded":
+                //console.log("Damages Awarded was selected");
+                var controlValue = $('input[name=radioGroupDamagesAwarded]:radio:checked').val();
+                
+                showHideSingleElement("DamagesPaid", controlValue);
+                //showHideSingleElement("DamagesPaid_label", controlValue);
+                showHideSingleElement("DamagesReceived", controlValue);
+                //showHideSingleElement("DamagesReceived_label", controlValue);
                 break;
 
             case "AttnyFeeApp":
@@ -70,12 +100,6 @@
             default:
                 console.log("No Known Item was selected");
         }
-
-
-
-       
-
-
 
     }
 

@@ -569,12 +569,12 @@
                     var el = angular.element('<span  />');
                     if (scope.input.type.toLowerCase() == 'boolean') {
                         scope.input.required = false;
-                        el.append('<div class="directiveMatterExtraBoolLabel"><span ng-show="' + scope.input.required + '" class="mandatory pull-left">*&nbsp;</span>' +
+                        el.append('<div class="directiveMatterExtraBoolLabel"><span id="_mandatory_' + scope.input.fieldInternalName + '" ng-show="' + scope.input.required + '" class="mandatory pull-left">*&nbsp;</span>' +
                            '<span ng-hide="' + scope.input.required + '" class="pull-left">&nbsp;&nbsp;&nbsp;&nbsp;</span>' +
                            '<label id="{{input.fieldInternalName}}" class="directiveFormFieldsLabelWidth" >{{input.name}}: </label></div>');
                     }
                     else {
-                        el.append('<div><span ng-show="' + scope.input.required + '" class="mandatory pull-left">*&nbsp;</span>' +
+                        el.append('<div><span id="_mandatory_' + scope.input.fieldInternalName + '" ng-show="' + scope.input.required + '" class="mandatory pull-left">*&nbsp;</span>' +
                            '<span ng-hide="' + scope.input.required + '" class="pull-left">&nbsp;&nbsp;&nbsp;&nbsp;</span>' +
                            '<label id="{{input.fieldInternalName}}_label" class="directiveFormFieldsLabelWidth" >{{input.fieldDisplayName}}: </label></div>');
                     }

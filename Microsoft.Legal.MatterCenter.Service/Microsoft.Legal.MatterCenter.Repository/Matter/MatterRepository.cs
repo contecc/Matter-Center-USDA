@@ -2101,10 +2101,18 @@ namespace Microsoft.Legal.MatterCenter.Repository
                     FieldChoice fieldChoice = clientContext.CastTo<FieldChoice>(field);
                     clientContext.Load(fieldChoice, f => f.Choices);
                     clientContext.ExecuteQuery();
-                    foreach (string item in fieldChoice.Choices)
+                    //foreach (string item in fieldChoice.Choices)
+                    //{
+                    //    //fieldList.Add(Guid.NewGuid().ToString(), item);
+
+                    //    fieldList.Add(item, item);
+                    //}
+
+                    for (int i = 0; i < fieldChoice.Choices.Count(); i++)
                     {
-                        fieldList.Add(Guid.NewGuid().ToString(), item);
+                        fieldList.Add(fieldChoice.Choices[i] + "_" + i.ToString(), fieldChoice.Choices[i]);
                     }
+
                 }
                 else {
 
@@ -2121,21 +2129,24 @@ namespace Microsoft.Legal.MatterCenter.Repository
                         clientContext.Load(termStore);
                         clientContext.ExecuteQuery();
 
-                        var termSet = termStore.GetTermSet(new Guid("b09a5850-f34a-4905-9469-e678aecd4a90"));
-                       
-                        //var termSet = termStore.GetTermSetsByName("Program",1033);
-                        clientContext.Load(termSet);
+                        var termGroup = termStore.Groups.GetByName("MatterCenterTerms");
+                        clientContext.Load(termStore);
                         clientContext.ExecuteQuery();
 
+                        //TermSet === InternalName (if there isn't a matching internal name, this will fail)
+                        //Mapping to the Internal Name
+                        var termSet = termGroup.TermSets.GetByName(field.InternalName); 
+                        clientContext.Load(termSet);
+                        clientContext.ExecuteQuery();
 
                         var terms = termSet.GetAllTerms();
                         clientContext.Load(terms);
                         clientContext.ExecuteQuery();
 
-
-                        foreach (var term in terms)
+                   
+                        for(int i=0; i < terms.Count ;i++)
                         {
-                            fieldList.Add(term.PathOfTerm, term.PathOfTerm);
+                             fieldList.Add(terms[i].PathOfTerm + "_" + i.ToString(), terms[i].PathOfTerm);
                         }
 
                     } //endif
