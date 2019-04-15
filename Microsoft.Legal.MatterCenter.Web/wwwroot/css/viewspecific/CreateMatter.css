@@ -1586,10 +1586,11 @@ left: -19px;
 }
 .directiveFormFields{
     /*Changed from 180px to accompdate the long values in the multichoice*/
-    width:225px;  
+    width:260px;  
 }
 .multiSelectHeight{
-    height:100px;
+    /*Changed from 125pm to accomodate the long values in the multichoice*/
+    height:150px;
 }
 .directiveFormFieldsLabelWidth{
     width:180px;

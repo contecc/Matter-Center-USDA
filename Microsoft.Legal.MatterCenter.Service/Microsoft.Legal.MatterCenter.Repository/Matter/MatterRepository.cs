@@ -2135,7 +2135,14 @@ namespace Microsoft.Legal.MatterCenter.Repository
 
                         //TermSet === InternalName (if there isn't a matching internal name, this will fail)
                         //Mapping to the Internal Name
-                        var termSet = termGroup.TermSets.GetByName(field.InternalName); 
+                        string termsetDesired = field.InternalName;
+
+                        //Some of the InternalNames aren't 1:1 mapped to the TermSet
+                        if (termsetDesired.Equals("OriginalForum")) {
+                            termsetDesired = "U.S. District Courts";
+                        }
+
+                        var termSet = termGroup.TermSets.GetByName(termsetDesired); 
                         clientContext.Load(termSet);
                         clientContext.ExecuteQuery();
 
