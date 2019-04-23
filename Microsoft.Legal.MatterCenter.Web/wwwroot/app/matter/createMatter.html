@@ -92,10 +92,14 @@
                 break;
 
             case "AttnyFeeApp":
-                console.log("Attorney Fee App was selected");
+                var controlValue = $('input[name=radioGroupAttnyFeeApp]:radio:checked').val();
+                showHideSingleElement("AttorneyFeesPaid", controlValue);
+                //console.log("Attorney Fee App was selected");
                 break;
             case "AttnyFeeGranted":
-                console.log("Attorney Fee GRANTED was selected");
+                var controlValue = $('input[name=radioGroupAttnyFeeGranted]:radio:checked').val();
+                showHideSingleElement("AttorneyFeeStatute", controlValue);
+                //console.log("Attorney Fee GRANTED was selected");
                 break;
             default:
                 console.log("No Known Item was selected");
